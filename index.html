@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <!--
-    <head> is wat de BROWSER leest maar de bezoeker NIET ziet.
-    Hier stel je de taal in, de paginatitel (staat in het tabblad),
-    en laad je je lettertype en CSS in.
-  -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Built Environment Portfolio</title>
 
-  <!-- Google Fonts: laadt het lettertype 'Outfit' van internet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Jouw eigen CSS bestand -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Extra stijlen die alleen op DEZE pagina gelden -->
   <style>
-    /* --- HERO SECTIE ---
-       Het grote blok bovenaan met je naam en avatar.
-       'display: flex' zet de avatar en tekst naast elkaar.
-    */
+  
     .hero {
       padding: 5rem 0 4rem;
       display: flex;
@@ -30,7 +20,6 @@
       gap: 2.5rem;
     }
 
-    /* De cirkel met je initialen */
     .avatar {
       width: 80px;
       height: 80px;
@@ -42,7 +31,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0; /* voorkomt dat de cirkel kleiner wordt */
+      flex-shrink: 0; 
     }
 
     .hero-naam {
@@ -66,21 +55,17 @@
       margin-bottom: 1rem;
     }
 
-    /* De rij met skills-pills */
+  
     .pills {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
-    /* --- JAAR-BLOKKEN ---
-       De paarse/groene blokken per jaar.
-    */
     .jaar-sectie {
       margin-bottom: 3rem;
     }
 
-    /* De gekleurde koptekst van een jaarblok */
     .jaar-header {
       padding: 1rem 1.25rem;
       border-radius: var(--radius) var(--radius) 0 0;
@@ -114,10 +99,6 @@
     .jaar-header.jaar1 span { color: var(--paars); }
     .jaar-header.jaar2 span { color: var(--groen); }
 
-    /* Het grid van projectkaarten eronder.
-       'repeat(auto-fit, ...)' maakt automatisch 2 of 3 kolommen
-       afhankelijk van hoe breed het scherm is.
-    */
     .projecten-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
