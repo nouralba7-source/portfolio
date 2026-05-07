@@ -8,103 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
   <style>
-    .proj-hero {
-      padding: 3rem 0 2rem;
-      border-bottom: 1px solid var(--rand);
-      margin-bottom: 2rem;
-    }
+    .proj-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--rand); margin-bottom: 2rem; }
     .proj-titel { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
     .proj-meta  { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 0.875rem; color: var(--tekst-zacht); }
 
-    /* Sketchfab embed wrapper */
-    .embed-wrap {
-      border: 1px solid var(--rand);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-    .embed-header {
-      background: #f5f5f5;
-      padding: 8px 14px;
-      border-bottom: 1px solid var(--rand);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: var(--tekst-zacht);
-    }
-    .embed-3d {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--paars);
-      font-size: 0.78rem;
-    }
-    .embed-3d::before {
-      content: '⬡';
-      font-size: 0.7rem;
-    }
+    .embed-wrap { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; }
+    .embed-header { background: #f5f5f5; padding: 8px 14px; border-bottom: 1px solid var(--rand); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--tekst-zacht); }
+    .embed-3d { display: flex; align-items: center; gap: 5px; color: var(--paars); font-size: 0.78rem; }
+    .embed-3d::before { content: '⬡'; font-size: 0.7rem; }
 
-    /*
-      Sketchfab iframe: vervang de src door jouw eigen Sketchfab-embed URL.
-      Ga naar sketchfab.com → upload je FBX/OBJ → klik "Embed" → kopieer de URL.
-      Zet die URL hieronder bij src="...".
-    */
-    .sketchfab-iframe {
-      width: 100%;
-      height: 420px;
-      border: none;
-      display: block;
-      background: #f0eefc;
-    }
-
-    /* Placeholder die je ziet TOTDAT je een echte Sketchfab-link invult */
-    .model-placeholder {
-      width: 100%;
-      height: 420px;
-      background: linear-gradient(135deg, var(--paars-licht) 0%, #ddd9fb 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: var(--paars-donker);
-    }
-    .model-placeholder .icoon { font-size: 3rem; }
-    .model-placeholder p { font-size: 0.9rem; font-weight: 500; }
-    .model-placeholder small { font-size: 0.78rem; color: var(--paars); opacity: 0.7; }
-
-    /* Twee kolommen: info links, afbeeldingen rechts */
     .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .sectie-h { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; }
+    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
 
-    .sectie-h {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--tekst-zacht);
-      margin-bottom: 0.75rem;
-    }
-    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
-    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    /*
-      Afbeelding-placeholder: vervang de <div class="foto-placeholder">
-      door een gewone <img src="jouwfoto.jpg" ...> als je de afbeelding hebt.
-    */
     .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .foto-placeholder {
-      aspect-ratio: 4/3;
-      background: var(--paars-licht);
-      border: 1px solid #d4d0f5;
+    .fotos img {
+      width: 100%;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      color: var(--paars);
-      text-align: center;
-      padding: 1rem;
+      display: block;
+      object-fit: contain;
+      background: var(--paars-licht);
     }
   </style>
 </head>
@@ -139,25 +63,12 @@
         </div>
       </div>
 
-      <!-- 3D VIEWER -->
       <div class="embed-wrap fade-2">
         <div class="embed-header">
           <span>Tiny House · 3D model</span>
           <span class="embed-3d">3D viewer — Sketchfab</span>
         </div>
-
-        <!--
-          STAP 1: Exporteer je Revit-model → File → Export → FBX of OBJ
-          STAP 2: Maak een gratis account op sketchfab.com
-          STAP 3: Upload je bestand
-          STAP 4: Open je model → klik op "Embed" → kopieer de embed-URL
-          STAP 5: Vervang de placeholder hieronder door:
-            <iframe class="sketchfab-iframe"
-              src="https://sketchfab.com/models/JOUW-MODEL-ID/embed"
-              allowfullscreen>
-            </iframe>
-        -->
-          <iframe
+        <iframe
           title="Tiny House — Revit model"
           frameborder="0"
           allowfullscreen
@@ -166,34 +77,35 @@
           allow="autoplay; fullscreen; xr-spatial-tracking"
           style="width:100%; height:420px; display:block;"
           src="https://sketchfab.com/models/4da45924ca70450fb3dea0ef01fbdbb2/embed">
-          </iframe>
+        </iframe>
+      </div>
 
-      <!-- INFO + FOTOS -->
       <div class="layout fade-3">
         <div>
-          <div class="sectie-h">Over dit project</div>
-          <p class="beschrijving">
-            <!-- Schrijf hier jouw eigen beschrijving van het project -->
-            Voor dit project heb ik een tiny house ontworpen en gemodelleerd in Revit.
-            [Schrijf hier wat jij hebt gemaakt, wat de opdracht was en wat je hebt geleerd.]
-          </p>
           <div class="sectie-h">Tools gebruikt</div>
           <div class="pills">
             <span class="pill pill-paars">Revit</span>
             <span class="pill pill-amber">3D-modellering</span>
             <span class="pill pill-paars">Bouwtekeningen</span>
           </div>
+
+          <div class="sectie-h">Over dit project</div>
+          <p class="beschrijving">
+            Voor dit project was de opdracht om een tiny house te ontwerpen en volledig
+            uit te werken in Revit. Een tiny house is een kleine, compacte woning van
+            maximaal 50 m² die efficiënt gebruik maakt van de beschikbare ruimte.
+            Ik heb het ontwerp uitgewerkt met plattegronden, gevels en een volledig
+            3D-model. Daarbij heb ik rekening gehouden met de indeling, de constructie
+            en de maatvoering van de ruimtes.
+          </p>
         </div>
 
         <div>
           <div class="sectie-h">Afbeeldingen</div>
           <div class="fotos">
-            <!-- Vervang deze placeholders door echte afbeeldingen:
-                 <img src="../afbeeldingen/tinyhouse-plattegrond.jpg" alt="Plattegrond" style="width:100%; border-radius:8px;">
-            -->
-          <img src="../afbeeldingen/3d.png" alt="3D aanzicht" style="width:100%; border-radius:8px; aspect-ratio:4/3; object-fit:cover;">
-          <img src="../afbeeldingen/zijaanzicht.png" alt="Zijaanzicht" style="width:100%; border-radius:8px; aspect-ratio:4/3; object-fit:cover;">
-          <img src="../afbeeldingen/plattegrond.png" alt="Plattegrond" style="width:100%; border-radius:8px; aspect-ratio:4/3; object-fit:cover;">
+            <img src="../afbeeldingen/plattegrond.png" alt="Plattegrond">
+            <img src="../afbeeldingen/zijaanzicht.png" alt="Zijaanzicht">
+            <img src="../afbeeldingen/3d.png" alt="3D aanzicht">
           </div>
         </div>
       </div>
