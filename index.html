@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Built Environment Portfolio</title>
 
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
-  <style>
   
+  <style>
+
+    
     .hero {
       padding: 5rem 0 4rem;
       display: flex;
@@ -20,18 +23,15 @@
       gap: 2.5rem;
     }
 
+    /* De profielfoto */
     .avatar {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      background: var(--paars-licht);
-      color: var(--paars-donker);
-      font-size: 1.4rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0; 
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid var(--paars-licht);
     }
 
     .hero-naam {
@@ -55,17 +55,21 @@
       margin-bottom: 1rem;
     }
 
-  
+    /* De rij met skills-pills */
     .pills {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
+    /* --- JAAR-BLOKKEN ---
+       De paarse/groene blokken per jaar.
+    */
     .jaar-sectie {
       margin-bottom: 3rem;
     }
 
+    /* De gekleurde koptekst van een jaarblok */
     .jaar-header {
       padding: 1rem 1.25rem;
       border-radius: var(--radius) var(--radius) 0 0;
@@ -99,6 +103,7 @@
     .jaar-header.jaar1 span { color: var(--paars); }
     .jaar-header.jaar2 span { color: var(--groen); }
 
+  
     .projecten-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -120,7 +125,7 @@
       display: block;
     }
 
-    /* Laatste kaart in een rij heeft geen rechterrand */
+    
     .project-kaart:last-child { border-right: none; }
 
     .project-kaart:hover { background: #f5f4ff; }
@@ -150,7 +155,7 @@
       margin-top: 0.2rem;
     }
 
-    /* De scheidingslijn tussen hero en de jaar-blokken */
+    
     .sectie-label {
       font-size: 0.75rem;
       font-weight: 600;
@@ -164,11 +169,7 @@
 
 <body>
 
-  <!-- =====================
-       NAVIGATIEBALK
-       De <a href="..."> links verwijzen naar andere pagina's.
-       'active' markeert de huidige pagina.
-  ===================== -->
+ 
   <nav class="nav">
     <a href="index.html" class="nav-logo">Built Environment Portfolio</a>
     <ul class="nav-links">
@@ -178,26 +179,22 @@
     </ul>
   </nav>
 
-  <!-- =====================
-       HOOFDINHOUD
-       Alles binnen <main> is de zichtbare pagina-inhoud.
-  ===================== -->
+ 
   <main>
     <div class="container">
 
-      <!-- HERO: naam, opleiding, bio, skills -->
+     
       <section class="hero">
-        <div class="avatar fade-1">AB</div>
+        <img src="afbeeldingen/abdennour.jpg" alt="Abdennour el Banihiati" class="avatar fade-1">
         <div>
-          <!-- 'fade-1' t/m 'fade-4' zorgen voor het instap-animatie effect.
-               Elk element komt iets later binnen — zie style.css @keyframes fadeUp -->
+         
           <h1 class="hero-naam fade-2">Abdennour el Banihiati</h1>
           <div class="hero-opleiding fade-2">Data-gedreven Built Environment</div>
           <p class="hero-bio fade-3">
-            Student bij Hogeschool Utrecht, jaar 2. Ik werk met GIS, Python, parametrisch
+            Student aan de HU, jaar 2. Ik werk met GIS, Python, parametrisch
             ontwerpen en data-visualisatie om ruimtelijke vraagstukken op te lossen.
           </p>
-          <!-- Skills: voeg hier zelf meer bij of verwijder er een -->
+         
           <div class="pills fade-4">
             <span class="pill pill-paars">Python</span>
             <span class="pill pill-groen">GIS</span>
@@ -209,10 +206,7 @@
         </div>
       </section>
 
-      <!-- =====================
-           JAAR 1
-           id="jaar1" is zodat de nav-link "#jaar1" hiernaartoe springt
-      ===================== -->
+ 
       <section class="jaar-sectie fade-3" id="jaar1">
         <div class="sectie-label">Jaar 1</div>
 
@@ -223,17 +217,14 @@
 
         <div class="projecten-grid">
 
-          <!-- PROJECT: Demkaterrein
-               href verwijst naar de projectpagina.
-               Zorg dat de mappenstructuur klopt: jaar1/demkaterrein.html
-          -->
+          
           <a href="jaar1/demkaterrein.html" class="project-kaart">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 1</div>
                 <div class="kaart-titel">Demkaterrein</div>
               </div>
-              <!-- badge-inter = groen "interactief" labeltje -->
+            
               <span class="badge badge-inter">interactief</span>
             </div>
             <div class="kaart-sub">GIS-kaarten ruimtelijke analyse · meerdere kaartlagen</div>
@@ -308,11 +299,12 @@
     </div>
   </main>
 
+
   <footer>
     <span>Built Environment Portfolio — 2026</span>
     <div style="display:flex; gap:1.5rem;">
-      <a href="https://linkedin.com/in/profiel" target="_blank">LinkedIn</a>
-      <a href="https://github.com/nouralba7-source" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/jouwprofiel" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
     </div>
   </footer>
 
