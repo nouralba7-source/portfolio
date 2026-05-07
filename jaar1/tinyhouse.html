@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiny House — Built Environment Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .proj-hero {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--rand);
+      margin-bottom: 2rem;
+    }
+    .proj-titel { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .proj-meta  { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 0.875rem; color: var(--tekst-zacht); }
+
+    /* Sketchfab embed wrapper */
+    .embed-wrap {
+      border: 1px solid var(--rand);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .embed-header {
+      background: #f5f5f5;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--rand);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--tekst-zacht);
+    }
+    .embed-3d {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--paars);
+      font-size: 0.78rem;
+    }
+    .embed-3d::before {
+      content: '⬡';
+      font-size: 0.7rem;
+    }
+
+    /*
+      Sketchfab iframe: vervang de src door jouw eigen Sketchfab-embed URL.
+      Ga naar sketchfab.com → upload je FBX/OBJ → klik "Embed" → kopieer de URL.
+      Zet die URL hieronder bij src="...".
+    */
+    .sketchfab-iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+      background: #f0eefc;
+    }
+
+    /* Placeholder die je ziet TOTDAT je een echte Sketchfab-link invult */
+    .model-placeholder {
+      width: 100%;
+      height: 420px;
+      background: linear-gradient(135deg, var(--paars-licht) 0%, #ddd9fb 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--paars-donker);
+    }
+    .model-placeholder .icoon { font-size: 3rem; }
+    .model-placeholder p { font-size: 0.9rem; font-weight: 500; }
+    .model-placeholder small { font-size: 0.78rem; color: var(--paars); opacity: 0.7; }
+
+    /* Twee kolommen: info links, afbeeldingen rechts */
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+
+    .sectie-h {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tekst-zacht);
+      margin-bottom: 0.75rem;
+    }
+    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    /*
+      Afbeelding-placeholder: vervang de <div class="foto-placeholder">
+      door een gewone <img src="jouwfoto.jpg" ...> als je de afbeelding hebt.
+    */
+    .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .foto-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--paars-licht);
+      border: 1px solid #d4d0f5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: var(--paars);
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">Built Environment Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Over mij</a></li>
+      <li><a href="index.html" class="active">Jaar 1</a></li>
+      <li><a href="../jaar2/index.html">Jaar 2</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <div class="proj-hero fade-1">
+        <div class="breadcrumb">
+          <a href="../index.html">Portfolio</a> ›
+          <a href="index.html">Jaar 1</a> ›
+          Blok 2 ›
+          <span>Tiny House</span>
+        </div>
+        <h1 class="proj-titel">Tiny House — compact wonen in Revit</h1>
+        <div class="proj-meta">
+          <span>Jaar 1 · Blok 2</span>
+          <span>·</span>
+          <span>Ontwerp &amp; 3D-modellering</span>
+          <span>·</span>
+          <span class="badge badge-3d">3D model</span>
+        </div>
+      </div>
+
+      <!-- 3D VIEWER -->
+      <div class="embed-wrap fade-2">
+        <div class="embed-header">
+          <span>Tiny House · 3D model</span>
+          <span class="embed-3d">3D viewer — Sketchfab</span>
+        </div>
+
+        <!--
+          STAP 1: Exporteer je Revit-model → File → Export → FBX of OBJ
+          STAP 2: Maak een gratis account op sketchfab.com
+          STAP 3: Upload je bestand
+          STAP 4: Open je model → klik op "Embed" → kopieer de embed-URL
+          STAP 5: Vervang de placeholder hieronder door:
+            <iframe class="sketchfab-iframe"
+              src="https://sketchfab.com/models/JOUW-MODEL-ID/embed"
+              allowfullscreen>
+            </iframe>
+        -->
+        <div class="model-placeholder">
+          <div class="icoon">⬡</div>
+          <p>3D model komt hier</p>
+          <small>Vervang dit door je Sketchfab embed — zie de uitleg in de code</small>
+        </div>
+      </div>
+
+      <!-- INFO + FOTOS -->
+      <div class="layout fade-3">
+        <div>
+          <div class="sectie-h">Over dit project</div>
+          <p class="beschrijving">
+            <!-- Schrijf hier jouw eigen beschrijving van het project -->
+            Voor dit project heb ik een tiny house ontworpen en gemodelleerd in Revit.
+            [Schrijf hier wat jij hebt gemaakt, wat de opdracht was en wat je hebt geleerd.]
+          </p>
+          <div class="sectie-h">Tools gebruikt</div>
+          <div class="pills">
+            <span class="pill pill-paars">Revit</span>
+            <span class="pill pill-amber">3D-modellering</span>
+            <span class="pill pill-paars">Bouwtekeningen</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="sectie-h">Afbeeldingen</div>
+          <div class="fotos">
+            <!-- Vervang deze placeholders door echte afbeeldingen:
+                 <img src="../afbeeldingen/tinyhouse-plattegrond.jpg" alt="Plattegrond" style="width:100%; border-radius:8px;">
+            -->
+            <div class="foto-placeholder">Plattegrond<br><small>voeg hier je afbeelding in</small></div>
+            <div class="foto-placeholder">Gevel<br><small>voeg hier je afbeelding in</small></div>
+            <div class="foto-placeholder">3D aanzicht<br><small>voeg hier je afbeelding in</small></div>
+            <div class="foto-placeholder">Detail<br><small>voeg hier je afbeelding in</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-nav fade-4">
+        <a href="demkaterrein.html">← Blok 1 — Demkaterrein</a>
+        <a href="overvecht.html">Blok 3 — Overvecht →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Built Environment Portfolio — 2026</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="https://linkedin.com/in/jouwprofiel" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* ============================================
+   STYLE.CSS — gedeelde stijl voor alle pagina's
+   ============================================
+
+   Dit bestand wordt ingeladen door ELKE pagina.
+   Verander je hier iets, verandert het overal.
+   Handig! Je hoeft kleur of lettertype maar op
+   één plek aan te passen.
+*/
+
+/* --- VARIABELEN ---
+   Dit zijn je "instellingen". Wil je een andere
+   kleur? Verander het hier, en het past overal.
+*/
+:root {
+  --paars:        #534AB7;
+  --paars-licht:  #EEEDFE;
+  --paars-donker: #3C3489;
+  --groen:        #1D9E75;
+  --groen-licht:  #E1F5EE;
+  --amber:        #BA7517;
+  --amber-licht:  #FAEEDA;
+  --tekst:        #1a1a1a;
+  --tekst-zacht:  #666;
+  --rand:         #e5e5e5;
+  --achtergrond:  #fafafa;
+  --wit:          #ffffff;
+  --radius:       12px;
+  --schaduw:      0 2px 12px rgba(0,0,0,0.07);
+}
+
+/* --- RESET ---
+   Browsers hebben elk hun eigen standaard stijlen.
+   Dit zet alles op nul zodat het overal hetzelfde
+   eruitziet.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- BASIS ---
+   De standaard stijl voor de hele pagina.
+   'Outfit' is het lettertype — geladen via Google Fonts.
+*/
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* --- NAVIGATIEBALK ---
+   De balk bovenaan die op elke pagina hetzelfde is.
+   'position: sticky' zorgt dat hij meescrolt en
+   bovenaan blijft plakken.
+*/
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rand);
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--tekst);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  color: var(--tekst-zacht);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* ':hover' = wat er gebeurt als je muist eroverheen gaat */
+.nav-links a:hover {
+  color: var(--paars);
+}
+
+/* '.active' = de huidige pagina in het menu */
+.nav-links a.active {
+  color: var(--paars);
+  font-weight: 500;
+}
+
+/* --- CONTAINER ---
+   Zorgt dat de inhoud niet te breed wordt op grote
+   schermen. 'margin: 0 auto' centreert het.
+*/
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- PILLS / TAGS ---
+   De gekleurde labels zoals "Python" en "GIS".
+   De kleur-varianten staan hieronder.
+*/
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.pill-paars { background: var(--paars-licht); color: var(--paars-donker); }
+.pill-groen  { background: var(--groen-licht); color: #0F6E56; }
+.pill-amber  { background: var(--amber-licht); color: #633806; }
+.pill-inter  { background: var(--groen-licht); color: #0F6E56; }
+
+/* --- BADGE (interactief / 3D) ---
+   Klein labeltje op een projectkaart.
+*/
+.badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.badge-inter { background: var(--groen-licht); color: #0F6E56; }
+.badge-3d    { background: var(--paars-licht); color: var(--paars-donker); }
+
+/* --- KAART (card) ---
+   Een wit vlak met schaduw en afgeronde hoeken.
+   Wordt gebruikt voor project-blokken.
+*/
+.card {
+  background: var(--wit);
+  border: 1px solid var(--rand);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--schaduw);
+}
+
+/* --- BREADCRUMB ---
+   De kleine navigatie bovenaan een projectpagina:
+   "Jaar 1 › Blok 1 › Demkaterrein"
+*/
+.breadcrumb {
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumb a {
+  color: var(--tekst-zacht);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--paars); }
+.breadcrumb span    { color: var(--paars); }
+
+/* --- PROJECT NAVIGATIE ---
+   De "← vorige / volgende →" onderaan een projectpagina.
+*/
+.proj-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rand);
+  margin-top: 3rem;
+}
+
+.proj-nav a {
+  font-size: 0.875rem;
+  color: var(--paars);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.proj-nav a:hover { text-decoration: underline; }
+
+/* --- FOOTER ---
+   Onderaan elke pagina.
+*/
+footer {
+  border-top: 1px solid var(--rand);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+}
+
+footer a {
+  color: var(--tekst-zacht);
+  text-decoration: none;
+}
+
+footer a:hover { color: var(--paars); }
+
+/* --- ANIMATIES ---
+   Elementen "faden in" als de pagina laadt.
+   'animation-delay' zorgt voor een stagger-effect:
+   elk element komt iets later binnen.
+*/
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-1 { animation: fadeUp 0.5s ease both; }
+.fade-2 { animation: fadeUp 0.5s ease 0.1s both; }
+.fade-3 { animation: fadeUp 0.5s ease 0.2s both; }
+.fade-4 { animation: fadeUp 0.5s ease 0.3s both; }

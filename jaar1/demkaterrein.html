@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demkaterrein — Built Environment Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- '../style.css' = één mapje omhoog (naar de hoofdmap), dan style.css -->
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* --- PAGINA OPBOUW ---
+       De pagina is verdeeld in twee kolommen:
+       links de info/knoppen, rechts de kaart.
+       'grid-template-columns: 200px 1fr' = smalle linkerkolom, brede rechter.
+    */
+    .proj-hero {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--rand);
+      margin-bottom: 2rem;
+    }
+
+    .proj-titel {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .proj-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--tekst-zacht);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* --- LINKERPANEEL ---
+       Kaartlagen-knoppen en tools.
+    */
+    .paneel h3 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tekst-zacht);
+      margin-bottom: 0.6rem;
+    }
+
+    .paneel-sectie { margin-bottom: 1.5rem; }
+
+    /* De knoppen om kaartlagen te wisselen */
+    .laag-knop {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--rand);
+      border-radius: 8px;
+      background: var(--wit);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Outfit', sans-serif;
+      color: var(--tekst);
+      margin-bottom: 6px;
+      text-align: left;
+      transition: all 0.15s;
+    }
+
+    .laag-knop:hover { border-color: var(--paars); }
+
+    /* Als een knop 'actief' is (geselecteerde laag) */
+    .laag-knop.actief {
+      background: var(--paars-licht);
+      border-color: #c0bdf0;
+      color: var(--paars-donker);
+      font-weight: 500;
+    }
+
+    .laag-kleur {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    /* --- KAART SECTIE ---
+       De rechterkant met de kaart en legenda.
+    */
+    .kaart-wrap {
+      border: 1px solid var(--rand);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .kaart-header {
+      background: #f5f5f5;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--rand);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--tekst-zacht);
+    }
+
+    .kaart-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--groen);
+      font-size: 0.78rem;
+    }
+
+    /* Het groene bolletje naast "interactief" */
+    .kaart-live::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--groen);
+      display: block;
+    }
+
+    /* De canvas is het teken-oppervlak voor de kaart.
+       JavaScript tekent hier alles op. */
+    #kaartCanvas {
+      width: 100%;
+      height: 320px;
+      display: block;
+      cursor: crosshair;
+    }
+
+    /* --- TOOLTIP ---
+       Het pop-up blokje dat je muis volgt.
+       'position: fixed' = gepositioneerd ten opzichte van het scherm,
+       niet ten opzichte van de pagina. Zo volgt het de muis perfect.
+       'pointer-events: none' = de tooltip blokkeert zelf geen hover-events.
+    */
+    #tooltip {
+      position: fixed;
+      pointer-events: none;
+      background: var(--wit);
+      border: 1px solid var(--rand);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      min-width: 170px;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .tt-naam {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: var(--tekst);
+    }
+
+    .tt-rij {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .tt-label { color: var(--tekst-zacht); }
+    .tt-waarde { font-weight: 500; }
+
+    /* De score-balk onderaan de tooltip */
+    .tt-balk-bg {
+      height: 5px;
+      background: var(--rand);
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .tt-balk-fill {
+      height: 5px;
+      border-radius: 3px;
+      transition: width 0.2s;
+    }
+
+    /* Legenda onder de kaart */
+    .legenda {
+      padding: 12px 14px;
+      border-top: 1px solid var(--rand);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--tekst-zacht);
+    }
+
+    .leg-bol {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Tekst beschrijving onder de kaart */
+    .beschrijving {
+      font-size: 0.95rem;
+      color: var(--tekst-zacht);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">Built Environment Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Over mij</a></li>
+      <li><a href="../jaar1/index.html" class="active">Jaar 1</a></li>
+      <li><a href="../jaar2/index.html">Jaar 2</a></li>
+    </ul>
+  </nav>
+
+  <!-- De tooltip staat buiten de kaart zodat hij overal op het scherm kan -->
+  <div id="tooltip">
+    <div class="tt-naam" id="tt-naam"></div>
+    <div class="tt-rij"><span class="tt-label" id="tt-l1"></span><span class="tt-waarde" id="tt-w1"></span></div>
+    <div class="tt-rij"><span class="tt-label" id="tt-l2"></span><span class="tt-waarde" id="tt-w2"></span></div>
+    <div class="tt-rij"><span class="tt-label" id="tt-l3"></span><span class="tt-waarde" id="tt-w3"></span></div>
+    <div class="tt-balk-bg"><div class="tt-balk-fill" id="tt-balk"></div></div>
+  </div>
+
+  <main>
+    <div class="container">
+
+      <div class="proj-hero fade-1">
+        <div class="breadcrumb">
+          <a href="../index.html">Portfolio</a> ›
+          <a href="index.html">Jaar 1</a> ›
+          Blok 1 ›
+          <span>Demkaterrein</span>
+        </div>
+        <h1 class="proj-titel">Demkaterrein — van bedrijventerrein naar woonwijk</h1>
+        <div class="proj-meta">
+          <span>Jaar 1 · Blok 1</span>
+          <span>·</span>
+          <span>GIS-analyse &amp; ruimtelijke data</span>
+          <span>·</span>
+          <span class="badge badge-inter">interactieve kaart</span>
+        </div>
+      </div>
+
+      <div class="layout fade-2">
+
+        <!-- LINKERPANEEL -->
+        <aside class="paneel">
+          <div class="paneel-sectie">
+            <h3>Kaartlagen</h3>
+
+            <!--
+              onclick="wisselLaag('koelte', this)" — als je hierop klikt,
+              roept de browser de JavaScript-functie 'wisselLaag' aan
+              met als argument de naam van de laag en het knopelement zelf.
+            -->
+            <button class="laag-knop actief" onclick="wisselLaag('koelte', this)">
+              <div class="laag-kleur" style="background:#534AB7;"></div>
+              Afstand koelte
+            </button>
+            <button class="laag-knop" onclick="wisselLaag('grondwater', this)">
+              <div class="laag-kleur" style="background:#1D9E75;"></div>
+              Grondwaterstand
+            </button>
+            <button class="laag-knop" onclick="wisselLaag('bevolking', this)">
+              <div class="laag-kleur" style="background:#BA7517;"></div>
+              Bevolkingsopbouw
+            </button>
+          </div>
+
+          <div class="paneel-sectie">
+            <h3>Tools gebruikt</h3>
+            <div class="pills">
+              <span class="pill pill-groen">QGIS</span>
+              <span class="pill pill-paars">Python</span>
+              <span class="pill pill-groen">Folium</span>
+              <span class="pill pill-paars">Ruimtelijke analyse</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- KAART -->
+        <div>
+          <div class="kaart-wrap">
+            <div class="kaart-header">
+              <span>Demkaterrein · Utrecht</span>
+              <span class="kaart-live">interactief — hover over een zone</span>
+            </div>
+
+            <!--
+              <canvas> is een leeg teken-oppervlak.
+              JavaScript gebruikt dit om vormen, kleuren en tekst op te tekenen.
+              width/height zijn de interne resolutie (hoe scherp het is).
+            -->
+            <canvas id="kaartCanvas" width="1200" height="640"></canvas>
+
+            <div class="legenda" id="legenda"></div>
+          </div>
+
+          <p class="beschrijving" style="margin-top:1.5rem;">
+            Voor dit project heb ik onderzocht hoe het Demkaterrein omgevormd kan worden
+            van bedrijventerrein naar woonwijk. Met QGIS en Python heb ik meerdere kaartlagen
+            gemaakt die ruimtelijke kwaliteiten in beeld brengen — zoals hitte, grondwater
+            en bevolkingsopbouw in de omgeving.
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigatie naar volgende/vorige project -->
+      <div class="proj-nav fade-3">
+        <span style="color:var(--tekst-zacht)">← Vorige</span>
+        <a href="tinyhouse.html">Blok 2 — Tiny House →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Built Environment Portfolio — 2026</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="https://linkedin.com/in/jouwprofiel" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+  <!--
+    Het JavaScript staat onderaan de pagina.
+    Reden: de browser leest HTML van boven naar beneden.
+    Als JS bovenaan zou staan, bestaat het canvas-element nog niet,
+    en zou document.getElementById('kaartCanvas') niets vinden.
+    Onderaan werkt het altijd.
+  -->
+  <script>
+    // ============================================================
+    // DATA: alle informatie per laag en per zone
+    // Een 'object' (de { }) is als een woordenboek: sleutel = waarde.
+    // Een 'array' (de [ ]) is een lijst.
+    // ============================================================
+    const lagen = {
+      koelte: {
+        kleur: '#534AB7',
+        legenda: [
+          { label: 'Dichtbij koelte',  kleur: '#534AB7' },
+          { label: 'Matig',            kleur: '#AFA9EC' },
+          { label: 'Ver weg',          kleur: '#EEEDFE' }
+        ],
+        zones: [
+          {
+            naam: 'Zone A — Kanaalzone',
+            // x, y, b, h zijn verhoudingen (0-1) van het canvas
+            // zodat de zones automatisch meeschalen als het venster kleiner wordt
+            x: 0.05, y: 0.1, b: 0.35, h: 0.35,
+            vulling: '#534AB7',
+            stats: ['Afstand tot park', '120 m', 'Schaduwdekking', '68%', 'Score', 'Hoog'],
+            balk: 85
+          },
+          {
+            naam: 'Zone B — Centrumgebied',
+            x: 0.45, y: 0.08, b: 0.3, h: 0.38,
+            vulling: '#AFA9EC',
+            stats: ['Afstand tot park', '340 m', 'Schaduwdekking', '31%', 'Score', 'Matig'],
+            balk: 45
+          },
+          {
+            naam: 'Zone C — Zuidrand',
+            x: 0.1, y: 0.52, b: 0.42, h: 0.35,
+            vulling: '#d4d0f5',
+            stats: ['Afstand tot park', '580 m', 'Schaduwdekking', '12%', 'Score', 'Laag'],
+            balk: 18
+          },
+          {
+            naam: 'Zone D — Oosthoek',
+            x: 0.62, y: 0.5, b: 0.3, h: 0.38,
+            vulling: '#7F77DD',
+            stats: ['Afstand tot park', '210 m', 'Schaduwdekking', '54%', 'Score', 'Goed'],
+            balk: 65
+          }
+        ]
+      },
+      grondwater: {
+        kleur: '#1D9E75',
+        legenda: [
+          { label: 'Ondiep (risico)', kleur: '#1D9E75' },
+          { label: 'Middel',          kleur: '#5DCAA5' },
+          { label: 'Diep',            kleur: '#9FE1CB' }
+        ],
+        zones: [
+          { naam: 'Zone A — Kanaalzone',   x: 0.05, y: 0.1,  b: 0.35, h: 0.35, vulling: '#1D9E75', stats: ['Grondwaterstand', '-0.8 m', 'Risico', 'Hoog',   'Drainage', 'Actief'],  balk: 80 },
+          { naam: 'Zone B — Centrumgebied',x: 0.45, y: 0.08, b: 0.3,  h: 0.38, vulling: '#5DCAA5', stats: ['Grondwaterstand', '-1.6 m', 'Risico', 'Middel',  'Drainage', 'Passief'], balk: 50 },
+          { naam: 'Zone C — Zuidrand',     x: 0.1,  y: 0.52, b: 0.42, h: 0.35, vulling: '#9FE1CB', stats: ['Grondwaterstand', '-2.4 m', 'Risico', 'Laag',    'Drainage', 'Geen'],    balk: 20 },
+          { naam: 'Zone D — Oosthoek',     x: 0.62, y: 0.5,  b: 0.3,  h: 0.38, vulling: '#5DCAA5', stats: ['Grondwaterstand', '-1.1 m', 'Risico', 'Middel',  'Drainage', 'Actief'],  balk: 60 }
+        ]
+      },
+      bevolking: {
+        kleur: '#BA7517',
+        legenda: [
+          { label: 'Hoge dichtheid', kleur: '#854F0B' },
+          { label: 'Middel',         kleur: '#EF9F27' },
+          { label: 'Laag',           kleur: '#FAC775' }
+        ],
+        zones: [
+          { naam: 'Zone A — Kanaalzone',   x: 0.05, y: 0.1,  b: 0.35, h: 0.35, vulling: '#EF9F27', stats: ['Bewoners/ha', '48',  'Leeftijd 0–18', '22%', 'Leeftijd 65+', '14%'], balk: 60 },
+          { naam: 'Zone B — Centrumgebied',x: 0.45, y: 0.08, b: 0.3,  h: 0.38, vulling: '#854F0B', stats: ['Bewoners/ha', '72',  'Leeftijd 0–18', '18%', 'Leeftijd 65+', '21%'], balk: 90 },
+          { naam: 'Zone C — Zuidrand',     x: 0.1,  y: 0.52, b: 0.42, h: 0.35, vulling: '#FAC775', stats: ['Bewoners/ha', '21',  'Leeftijd 0–18', '28%', 'Leeftijd 65+', '9%'],  balk: 28 },
+          { naam: 'Zone D — Oosthoek',     x: 0.62, y: 0.5,  b: 0.3,  h: 0.38, vulling: '#EF9F27', stats: ['Bewoners/ha', '35',  'Leeftijd 0–18', '25%', 'Leeftijd 65+', '11%'], balk: 45 }
+        ]
+      }
+    };
+
+    // Bijhouden welke laag actief is en welke zone de muis overheen gaat
+    let actieveLaag = 'koelte';
+    let hoverZone   = null;
+
+    // Snel de canvas en context ophalen
+    // 'ctx' is het teken-gereedschap. Alles wat je tekent gaat via ctx.
+    const canvas = document.getElementById('kaartCanvas');
+    const ctx    = canvas.getContext('2d');
+
+    // ============================================================
+    // TEKEN DE KAART
+    // Deze functie wordt aangeroepen bij elke laagwissel of hover.
+    // ============================================================
+    function tekenKaart() {
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // Leeg maken
+      ctx.clearRect(0, 0, W, H);
+
+      // Achtergrond (licht groen = gras/terrein)
+      ctx.fillStyle = '#d8e8d8';
+      ctx.fillRect(0, 0, W, H);
+
+      // Gridlijnen (straatpatroon)
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth = 1.5;
+      for (let x = 0; x < W; x += 80) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 80) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Hoofdwegen
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+      ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(0, H * 0.47); ctx.lineTo(W, H * 0.47); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W * 0.43, 0); ctx.lineTo(W * 0.43, H); ctx.stroke();
+
+      // Zones tekenen
+      const zones = lagen[actieveLaag].zones;
+      zones.forEach((zone, i) => {
+        const x = zone.x * W;
+        const y = zone.y * H;
+        const b = zone.b * W;
+        const h = zone.h * H;
+
+        // Afgeronde rechthoek tekenen
+        ctx.beginPath();
+        ctx.roundRect(x, y, b, h, 8);
+
+        // Hover = iets donkerder en dikke rand
+        ctx.fillStyle = hoverZone === i ? zone.vulling : zone.vulling + 'cc';
+        ctx.fill();
+
+        if (hoverZone === i) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        }
+
+        // Zonenaam als label bovenin de zone
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.font = `500 ${Math.round(W * 0.012)}px Outfit, sans-serif`;
+        ctx.fillText(zone.naam.split('—')[0].trim(), x + 10, y + 20);
+      });
+    }
+
+    // ============================================================
+    // LEGENDA BIJWERKEN
+    // ============================================================
+    function updateLegenda() {
+      const items = lagen[actieveLaag].legenda;
+      document.getElementById('legenda').innerHTML = items.map(item =>
+        `<div class="leg-item">
+          <div class="leg-bol" style="background:${item.kleur}"></div>
+          ${item.label}
+        </div>`
+      ).join('');
+    }
+
+    // ============================================================
+    // KAARTLAAG WISSELEN
+    // Wordt aangeroepen als je op een laag-knop klikt.
+    // ============================================================
+    function wisselLaag(naam, knop) {
+      actieveLaag = naam;
+
+      // Alle knoppen 'actief' class verwijderen, dan alleen de geklkte toevoegen
+      document.querySelectorAll('.laag-knop').forEach(k => k.classList.remove('actief'));
+      knop.classList.add('actief');
+
+      hoverZone = null;
+      tekenKaart();
+      updateLegenda();
+      document.getElementById('tooltip').style.display = 'none';
+    }
+
+    // ============================================================
+    // MUISBEWEGING: tooltip laten volgen
+    // 'mousemove' vuurt elke keer als de muis beweegt.
+    // ============================================================
+    canvas.addEventListener('mousemove', (e) => {
+      // Positie van de canvas op het scherm
+      const rect = canvas.getBoundingClientRect();
+
+      // Muis-positie als verhouding (0–1) van de canvas-grootte
+      const mx = (e.clientX - rect.left) / rect.width;
+      const my = (e.clientY - rect.top) / rect.height;
+
+      // Kijk of de muis over een zone gaat
+      const zones = lagen[actieveLaag].zones;
+      let gevonden = null;
+      zones.forEach((zone, i) => {
+        if (mx >= zone.x && mx <= zone.x + zone.b &&
+            my >= zone.y && my <= zone.y + zone.h) {
+          gevonden = i;
+        }
+      });
+
+      if (gevonden !== null) {
+        const zone = zones[gevonden];
+        hoverZone = gevonden;
+        tekenKaart();
+
+        // Tooltip vullen met de data van deze zone
+        document.getElementById('tt-naam').textContent = zone.naam;
+        document.getElementById('tt-l1').textContent   = zone.stats[0];
+        document.getElementById('tt-w1').textContent   = zone.stats[1];
+        document.getElementById('tt-l2').textContent   = zone.stats[2];
+        document.getElementById('tt-w2').textContent   = zone.stats[3];
+        document.getElementById('tt-l3').textContent   = zone.stats[4];
+        document.getElementById('tt-w3').textContent   = zone.stats[5];
+
+        const balk = document.getElementById('tt-balk');
+        balk.style.width      = zone.balk + '%';
+        balk.style.background = lagen[actieveLaag].kleur;
+
+        // Tooltip positioneren naast de muis
+        // Als de tooltip te ver rechts/onder gaat, klapt hij de andere kant op
+        const tt = document.getElementById('tooltip');
+        tt.style.display = 'block';
+        let tx = e.clientX + 14;
+        let ty = e.clientY + 14;
+        if (tx + 180 > window.innerWidth)  tx = e.clientX - 190;
+        if (ty + 140 > window.innerHeight) ty = e.clientY - 145;
+        tt.style.left = tx + 'px';
+        tt.style.top  = ty + 'px';
+
+      } else {
+        // Muis is niet over een zone: tooltip verbergen
+        if (hoverZone !== null) { hoverZone = null; tekenKaart(); }
+        document.getElementById('tooltip').style.display = 'none';
+      }
+    });
+
+    // Als de muis de canvas verlaat: tooltip verbergen
+    canvas.addEventListener('mouseleave', () => {
+      hoverZone = null;
+      tekenKaart();
+      document.getElementById('tooltip').style.display = 'none';
+    });
+
+    // Pagina opstarten: teken de kaart en legenda voor het eerst
+    tekenKaart();
+    updateLegenda();
+  </script>
+
+</body>
+</html>

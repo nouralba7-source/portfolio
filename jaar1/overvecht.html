@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overvecht — Built Environment Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .proj-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--rand); margin-bottom: 2rem; }
+    .proj-titel { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .proj-meta  { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 0.875rem; color: var(--tekst-zacht); }
+    .sectie-h   { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; }
+    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 2rem; }
+
+    /* Brede afbeeldingenrij bovenaan */
+    .hoofd-foto {
+      width: 100%;
+      aspect-ratio: 16/6;
+      background: linear-gradient(135deg, #d4f0e4 0%, #a8dfc7 100%);
+      border: 1px solid #b0dece;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #0F6E56;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* Twee kolommen */
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+
+    /* Statistieken-blokjes — de groene getallen */
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+    .stat-blok {
+      background: var(--groen-licht);
+      border: 1px solid #b0dece;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .stat-waarde { font-size: 1.5rem; font-weight: 600; color: #0F6E56; }
+    .stat-label  { font-size: 0.78rem; color: #1D9E75; margin-top: 2px; }
+
+    .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .foto-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--groen-licht);
+      border: 1px solid #b0dece;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: #0F6E56;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">Built Environment Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Over mij</a></li>
+      <li><a href="index.html" class="active">Jaar 1</a></li>
+      <li><a href="../jaar2/index.html">Jaar 2</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <div class="proj-hero fade-1">
+        <div class="breadcrumb">
+          <a href="../index.html">Portfolio</a> ›
+          <a href="index.html">Jaar 1</a> ›
+          Blok 3 ›
+          <span>Overvecht</span>
+        </div>
+        <h1 class="proj-titel">Overvecht — energieduurzamer maken</h1>
+        <div class="proj-meta">
+          <span>Jaar 1 · Blok 3</span>
+          <span>·</span>
+          <span>Energie &amp; duurzaamheid</span>
+        </div>
+      </div>
+
+      <!--
+        Vervang dit door een echte afbeelding van je project:
+        <img src="../afbeeldingen/overvecht-overzicht.jpg" alt="Overvecht overzicht" style="width:100%; border-radius:12px; margin-bottom:2rem;">
+      -->
+      <div class="hoofd-foto fade-2">
+        Luchtfoto / kaart van Overvecht<br>
+        <small style="opacity:0.7">voeg hier je afbeelding in</small>
+      </div>
+
+      <div class="layout fade-3">
+        <div>
+          <div class="sectie-h">Over dit project</div>
+          <p class="beschrijving">
+            <!-- Verander dit naar jouw eigen beschrijving -->
+            Voor dit project heb ik onderzocht hoe de wijk Overvecht in Utrecht energieduurzamer gemaakt kan worden.
+            [Schrijf hier wat jij hebt gedaan: welke maatregelen je hebt voorgesteld, welke data je hebt gebruikt en wat je conclusies waren.]
+          </p>
+
+          <div class="sectie-h">Tools gebruikt</div>
+          <div class="pills">
+            <span class="pill pill-groen">Energieberekeningen</span>
+            <span class="pill pill-paars">Python</span>
+            <span class="pill pill-groen">GIS</span>
+            <span class="pill pill-amber">Data-analyse</span>
+          </div>
+        </div>
+
+        <div>
+          <!-- Verander de getallen naar jouw eigen resultaten -->
+          <div class="sectie-h">Resultaten</div>
+          <div class="stats">
+            <div class="stat-blok">
+              <div class="stat-waarde">XX%</div>
+              <div class="stat-label">energiebesparing</div>
+            </div>
+            <div class="stat-blok">
+              <div class="stat-waarde">XX</div>
+              <div class="stat-label">woningen geanalyseerd</div>
+            </div>
+            <div class="stat-blok">
+              <div class="stat-waarde">XX ton</div>
+              <div class="stat-label">CO₂ reductie</div>
+            </div>
+            <div class="stat-blok">
+              <div class="stat-waarde">XX</div>
+              <div class="stat-label">maatregelen voorgesteld</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sectie-h fade-3">Afbeeldingen</div>
+      <div class="fotos fade-3" style="margin-bottom:2rem;">
+        <div class="foto-placeholder">Kaart maatregelen<br><small>voeg hier je afbeelding in</small></div>
+        <div class="foto-placeholder">Energieanalyse<br><small>voeg hier je afbeelding in</small></div>
+        <div class="foto-placeholder">Voor/na vergelijking<br><small>voeg hier je afbeelding in</small></div>
+        <div class="foto-placeholder">Grafiek resultaten<br><small>voeg hier je afbeelding in</small></div>
+      </div>
+
+      <div class="proj-nav fade-4">
+        <a href="tinyhouse.html">← Blok 2 — Tiny House</a>
+        <a href="../jaar2/tuinwijk.html">Jaar 2: Tuinwijk →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Built Environment Portfolio — 2026</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="https://linkedin.com/in/jouwprofiel" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

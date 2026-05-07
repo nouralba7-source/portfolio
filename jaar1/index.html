@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaar 1 — Built Environment Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .jaar-hero {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--rand);
+      margin-bottom: 2.5rem;
+    }
+    .jaar-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--paars);
+      margin-bottom: 0.5rem;
+    }
+    .jaar-titel { font-size: 2rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .jaar-bio   { font-size: 0.95rem; color: var(--tekst-zacht); max-width: 600px; line-height: 1.7; }
+
+    .sectie-h {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tekst-zacht);
+      margin-bottom: 1rem;
+    }
+
+    /* Grote projectkaarten met meer ruimte dan op de homepage */
+    .projecten { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; }
+
+    .proj-rij {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--wit);
+      border-top: 1px solid var(--rand);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .proj-rij:first-child { border-top: none; }
+    .proj-rij:hover { background: #f5f4ff; }
+
+    .proj-blok {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--paars);
+      background: var(--paars-licht);
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .proj-info {}
+    .proj-titel-rij {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .proj-omschrijving {
+      font-size: 0.85rem;
+      color: var(--tekst-zacht);
+    }
+
+    .pijl { font-size: 1.1rem; color: var(--paars); opacity: 0.5; }
+    .proj-rij:hover .pijl { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">Built Environment Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Over mij</a></li>
+      <li><a href="index.html" class="active">Jaar 1</a></li>
+      <li><a href="../jaar2/index.html">Jaar 2</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <div class="jaar-hero fade-1">
+        <div class="jaar-label">Jaar 1 — 2024/2025</div>
+        <h1 class="jaar-titel">Het eerste jaar</h1>
+        <p class="jaar-bio">
+          In het eerste jaar heb ik de basis gelegd van mijn data-gedreven aanpak binnen Built Environment.
+          Ik heb kennisgemaakt met GIS, ruimtelijke analyse, 3D-modellering in Revit en energieberekeningen.
+          <!-- Verander dit naar jouw eigen samenvatting van jaar 1 -->
+        </p>
+      </div>
+
+      <div class="sectie-h fade-2">Projecten dit jaar</div>
+
+      <div class="projecten fade-2">
+
+        <a href="demkaterrein.html" class="proj-rij">
+          <div class="proj-blok">Blok 1</div>
+          <div class="proj-info">
+            <div class="proj-titel-rij">
+              Demkaterrein
+              <span class="badge badge-inter" style="margin-left:8px;">interactief</span>
+            </div>
+            <div class="proj-omschrijving">
+              Van bedrijventerrein naar woonwijk — GIS-kaarten en ruimtelijke analyse
+            </div>
+          </div>
+          <div class="pijl">→</div>
+        </a>
+
+        <a href="tinyhouse.html" class="proj-rij">
+          <div class="proj-blok">Blok 2</div>
+          <div class="proj-info">
+            <div class="proj-titel-rij">
+              Tiny House
+              <span class="badge badge-3d" style="margin-left:8px;">3D</span>
+            </div>
+            <div class="proj-omschrijving">
+              Compact wonen — ontwerp en 3D-modellering in Revit
+            </div>
+          </div>
+          <div class="pijl">→</div>
+        </a>
+
+        <a href="overvecht.html" class="proj-rij">
+          <div class="proj-blok">Blok 3</div>
+          <div class="proj-info">
+            <div class="proj-titel-rij">Overvecht</div>
+            <div class="proj-omschrijving">
+              Energieduurzamer maken van een bestaande wijk in Utrecht
+            </div>
+          </div>
+          <div class="pijl">→</div>
+        </a>
+
+      </div>
+
+      <div class="proj-nav fade-3">
+        <a href="../index.html">← Terug naar home</a>
+        <a href="../jaar2/index.html">Naar jaar 2 →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Built Environment Portfolio — 2026</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="https://linkedin.com/in/jouwprofiel" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+</body>
+</html>
