@@ -196,37 +196,13 @@
       </div>
 
       <!-- INTERACTIEVE KAART -->
-      <div class="sectie-h fade-3">Interactieve analyse — hover over een zone</div>
-      <div class="kaart-wrap fade-3">
-        <div class="kaart-header">
-          <span>Demkaterrein · Utrecht</span>
-          <span class="kaart-live">interactief — wissel van kaartlaag</span>
-        </div>
-        <div class="kaart-layout">
-          <div class="kaart-paneel">
-            <div class="paneel-h">Kaartlagen</div>
-            <button class="laag-knop actief" onclick="wisselLaag('koelte',this)">
-              <div class="laag-kleur" style="background:#534AB7;"></div>Afstand koelte
-            </button>
-            <button class="laag-knop" onclick="wisselLaag('grondwater',this)">
-              <div class="laag-kleur" style="background:#1D9E75;"></div>Grondwaterstand
-            </button>
-            <button class="laag-knop" onclick="wisselLaag('hitte',this)">
-              <div class="laag-kleur" style="background:#E24B4A;"></div>Hitte-eiland
-            </button>
-            <button class="laag-knop" onclick="wisselLaag('bevolking',this)">
-              <div class="laag-kleur" style="background:#BA7517;"></div>Bevolkingsopbouw
-            </button>
-            <button class="laag-knop" onclick="wisselLaag('water',this)">
-              <div class="laag-kleur" style="background:#2563EB;"></div>Wateroverlast
-            </button>
-          </div>
-          <div>
-            <canvas id="kaartCanvas" width="1200" height="680"></canvas>
-            <div class="legenda" id="legenda"></div>
-          </div>
-        </div>
-      </div>
+<div class="sectie-h fade-3">Interactieve GIS-analyse</div>
+<div style="border:1px solid var(--rand); border-radius:var(--radius); overflow:hidden; margin-bottom:3rem;">
+  <iframe
+    src="demka-kaart/index.html"
+    style="width:100%; height:500px; border:none; display:block;">
+  </iframe>
+</div>
 
       <!-- KAARTENGALERIJ -->
       <div class="sectie-h fade-3">Alle GIS-kaarten — klik om te vergroten</div>
