@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="./resources/ol.css">
+        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+        <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+        <link rel="stylesheet" href="./resources/qgis2web.css">
+        <style>
+        html, body {
+            background-color: #ffffff;
+        }
+        .ol-control > * {
+            background-color: #f8f8f8!important;
+            color: #444444!important;
+            border-radius: 0px;
+        }
+        .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
+            color: #444444!important;
+        }
+        .search-layer-input-search {
+            background-color: #f8f8f8!important;
+        }
+        .ol-control > *:focus, .ol-control >*:hover {
+            background-color: rgba(248, 248, 248, 0.7)!important;
+        } 
+        .ol-control {
+            background-color: rgba(255,255,255,.4) !important;
+            padding: 2px !important;
+        } 
+        </style>
+
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Demkaterrein — GIS kaart</title>
+        <style>
+          /* Hover tooltip */
+          #hover-tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            min-width: 200px;
+            display: none;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+          }
+          #hover-tooltip .tt-titel {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 6px;
+          }
+          #hover-tooltip .tt-rij {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 4px;
+          }
+          #hover-tooltip .tt-label { color: #888; }
+          #hover-tooltip .tt-waarde { font-weight: 500; color: #1a1a1a; }
+          #hover-tooltip .tt-hint {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 8px;
+            font-style: italic;
+          }
+
+          /* Cursor veranderen als je over het gebied gaat */
+          #map { cursor: default; }
+          #map.op-gebied { cursor: pointer; }
+        </style>
+    </head>
+    <body>
+        <div id="map">
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+            <!-- Hover tooltip — volgt de muis -->
+            <div id="hover-tooltip">
+              <div class="tt-titel">Demkaterrein</div>
+              <div class="tt-rij"><span class="tt-label">Type</span><span class="tt-waarde">Voormalig industrieterrein</span></div>
+              <div class="tt-rij"><span class="tt-label">Oppervlak</span><span class="tt-waarde">ca. 12 ha</span></div>
+              <div class="tt-rij"><span class="tt-label">Hitte-effect</span><span class="tt-waarde">1,6 – 2,4 °C</span></div>
+              <div class="tt-rij"><span class="tt-label">Toekomst</span><span class="tt-waarde">Het Demkapark</span></div>
+              <div class="tt-hint">Klik voor meer info</div>
+            </div>
+        </div>
+        <script src="resources/qgis2web_expressions.js"></script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="./resources/ol-layerswitcher.js"></script>
+        <script src="resources/photon-geocoder-autocomplete.min.js"></script>
+        <script src="resources/olms.js"></script>
+        <script src="layers/Demkaterrein_2.js"></script>
+        <script src="styles/Demkaterrein_2_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
+        <script src="./resources/Autolinker.min.js"></script>
+        <script src="./resources/qgis2web.js"></script>
+
+        <script>
+        // ============================================================
+        // HOVER TOOLTIP
+        // Luistert naar muisbewegingen op de kaart.
+        // Als de muis over het Demkaterrein-polygon gaat:
+        //   → tooltip zichtbaar maken en laten meebewegen
+        //   → gebied oplichten met highlight-stijl
+        // Als de muis het gebied verlaat:
+        //   → tooltip verbergen, stijl terugzetten
+        // ============================================================
+
+        var tooltip = document.getElementById('hover-tooltip');
+        var mapEl   = document.getElementById('map');
+
+        // Highlight-stijl: rode rand dikker + lichte fill
+        var highlightStyle = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'rgba(220, 50, 50, 1)',
+                width: 4
+            }),
+            fill: new ol.style.Fill({
+                color: 'rgba(220, 50, 50, 0.18)'
+            })
+        });
+
+        // Normale stijl
+        var normaalStyle = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'rgba(220, 50, 50, 1)',
+                width: 2.5
+            }),
+            fill: new ol.style.Fill({
+                color: 'rgba(220, 50, 50, 0.05)'
+            })
+        });
+
+        var hoverFeature = null;
+
+        map.on('pointermove', function(e) {
+            // Kijk welke features onder de muis zitten
+            var feature = map.forEachFeatureAtPixel(e.pixel, function(f) {
+                return f;
+            });
+
+            if (feature) {
+                // Muis IS op een feature (het Demkaterrein)
+                if (hoverFeature !== feature) {
+                    // Reset vorige feature als die er was
+                    if (hoverFeature) {
+                        hoverFeature.setStyle(normaalStyle);
+                    }
+                    // Highlight de nieuwe feature
+                    feature.setStyle(highlightStyle);
+                    hoverFeature = feature;
+                }
+
+                // Tooltip tonen en positioneren
+                tooltip.style.display = 'block';
+                var rect = mapEl.getBoundingClientRect();
+                var tx = e.originalEvent.clientX - rect.left + 16;
+                var ty = e.originalEvent.clientY - rect.top  + 16;
+                // Voorkom dat tooltip buiten het scherm valt
+                if (tx + 220 > mapEl.offsetWidth)  tx = e.originalEvent.clientX - rect.left - 230;
+                if (ty + 160 > mapEl.offsetHeight) ty = e.originalEvent.clientY - rect.top  - 165;
+                tooltip.style.left = tx + 'px';
+                tooltip.style.top  = ty + 'px';
+
+                mapEl.classList.add('op-gebied');
+
+            } else {
+                // Muis is NIET op een feature
+                if (hoverFeature) {
+                    hoverFeature.setStyle(normaalStyle);
+                    hoverFeature = null;
+                }
+                tooltip.style.display = 'none';
+                mapEl.classList.remove('op-gebied');
+            }
+        });
+
+        // Tooltip verbergen als muis de kaart verlaat
+        mapEl.addEventListener('mouseleave', function() {
+            if (hoverFeature) {
+                hoverFeature.setStyle(normaalStyle);
+                hoverFeature = null;
+            }
+            tooltip.style.display = 'none';
+            mapEl.classList.remove('op-gebied');
+        });
+        </script>
+    </body>
+</html>
