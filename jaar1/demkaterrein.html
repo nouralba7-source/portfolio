@@ -15,88 +15,164 @@
     .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
     .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 2rem; }
 
-    /* --- VOOR/NA SECTIE --- */
-    .voor-na {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
+    /* VOOR/NA */
+    .voor-na { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
     .voor-na-kaart { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; }
-    .voor-na-header {
-      padding: 8px 14px;
-      background: #f5f5f5;
-      border-bottom: 1px solid var(--rand);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--tekst-zacht);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .voor-na-header .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-    }
-    .voor-na-kaart img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      height: 320px;
-    }
+    .voor-na-header { padding: 8px 14px; background: #f5f5f5; border-bottom: 1px solid var(--rand); font-size: 0.8rem; font-weight: 500; color: var(--tekst-zacht); display: flex; align-items: center; gap: 6px; }
+    .voor-na-header .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .voor-na-kaart img { width: 100%; display: block; object-fit: cover; height: 280px; cursor: zoom-in; }
 
-    /* --- INTERACTIEVE KAART --- */
-    .kaart-wrap { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; }
-    .kaart-header { background: #f5f5f5; padding: 8px 14px; border-bottom: 1px solid var(--rand); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--tekst-zacht); }
-    .kaart-live { display: flex; align-items: center; gap: 5px; color: var(--groen); font-size: 0.78rem; }
-    .kaart-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--groen); display: block; }
-
-    .kaart-layout { display: grid; grid-template-columns: 190px 1fr; }
-    .kaart-paneel { padding: 16px; border-right: 1px solid var(--rand); }
-    .paneel-h { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 8px; margin-top: 16px; }
-    .paneel-h:first-child { margin-top: 0; }
-
-    .laag-knop { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 9px; border: 1px solid var(--rand); border-radius: 7px; background: var(--wit); cursor: pointer; font-size: 0.82rem; font-family: 'Outfit', sans-serif; color: var(--tekst); margin-bottom: 5px; text-align: left; transition: all 0.15s; }
-    .laag-knop:hover { border-color: var(--paars); }
-    .laag-knop.actief { background: var(--paars-licht); border-color: #c0bdf0; color: var(--paars-donker); font-weight: 500; }
-    .laag-kleur { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-
-    #kaartCanvas { width: 100%; height: 340px; display: block; cursor: crosshair; }
-
-    #tooltip { position: fixed; pointer-events: none; background: var(--wit); border: 1px solid var(--rand); border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; min-width: 170px; display: none; z-index: 999; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .tt-naam { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
-    .tt-rij { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
-    .tt-label { color: var(--tekst-zacht); }
-    .tt-waarde { font-weight: 500; }
-    .tt-balk-bg { height: 5px; background: var(--rand); border-radius: 3px; margin-top: 8px; overflow: hidden; }
-    .tt-balk-fill { height: 5px; border-radius: 3px; transition: width 0.2s; }
-
-    .legenda { padding: 10px 14px; border-top: 1px solid var(--rand); display: flex; gap: 14px; flex-wrap: wrap; }
-    .leg-item { display: flex; align-items: center; gap: 5px; font-size: 0.78rem; color: var(--tekst-zacht); }
-    .leg-bol { width: 8px; height: 8px; border-radius: 50%; }
-
-    /* --- KAARTENGALERIJ --- */
-    .kaarten-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .kaart-item {
+    /* ============================================
+       KAARTVIEWER
+       Links: de kaartafbeelding (groot)
+       Rechts: knoppen om te wisselen + legenda
+    ============================================ */
+    .kaart-viewer {
       border: 1px solid var(--rand);
       border-radius: var(--radius);
       overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
+      margin-bottom: 3rem;
     }
-    .kaart-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .kaart-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
-    .kaart-item-label { padding: 8px 10px; font-size: 0.8rem; font-weight: 500; color: var(--tekst); background: var(--wit); border-top: 1px solid var(--rand); }
-    .kaart-item-sub { font-size: 0.72rem; color: var(--tekst-zacht); }
 
-    /* --- LIGHTBOX (kaart vergroten als je erop klikt) --- */
-    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
+    .kaart-viewer-header {
+      background: #f5f5f5;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--rand);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--tekst-zacht);
+    }
+
+    .kaart-viewer-body {
+      display: grid;
+      /* kaartafbeelding links neemt de meeste ruimte, paneel rechts is vast */
+      grid-template-columns: 1fr 220px;
+    }
+
+    /* De kaartafbeelding zelf */
+    .kaart-afbeelding-wrap {
+      position: relative;
+      background: #e8ede8;
+      border-right: 1px solid var(--rand);
+      overflow: hidden;
+    }
+
+    .kaart-afbeelding {
+      width: 100%;
+      aspect-ratio: 1755 / 1240;
+      object-fit: cover;
+      display: block;
+      /* fade animatie bij wisselen */
+      transition: opacity 0.25s ease;
+    }
+
+    /* Kaart naam als label over de afbeelding */
+    .kaart-naam-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.55);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    /* Vergroot-knop rechtsonder */
+    .kaart-zoom-knop {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.45);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      transition: background 0.15s;
+    }
+    .kaart-zoom-knop:hover { background: rgba(0,0,0,0.7); }
+
+    /* RECHTERPANEEL */
+    .kaart-paneel {
+      padding: 16px;
+      background: var(--wit);
+      overflow-y: auto;
+      max-height: 560px;
+    }
+
+    .paneel-h {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tekst-zacht);
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+    .paneel-h:first-child { margin-top: 0; }
+
+    /* Kaart-wisselknoppen */
+    .kaart-knop {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid var(--rand);
+      border-radius: 7px;
+      background: var(--wit);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: 'Outfit', sans-serif;
+      color: var(--tekst);
+      margin-bottom: 5px;
+      text-align: left;
+      transition: all 0.15s;
+      line-height: 1.3;
+    }
+    .kaart-knop:hover { border-color: var(--paars); background: #fafaff; }
+    .kaart-knop.actief {
+      background: var(--paars-licht);
+      border-color: #c0bdf0;
+      color: var(--paars-donker);
+      font-weight: 500;
+    }
+
+    .knop-kleur {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Legenda items */
+    .legenda-blok { margin-top: 4px; }
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      color: var(--tekst-zacht);
+      margin-bottom: 5px;
+    }
+    .leg-kleur {
+      width: 14px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
     .lightbox.open { display: flex; }
-    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px; object-fit: contain; }
     .lightbox-sluit { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; line-height: 1; }
     .lightbox-titel { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: white; font-size: 0.9rem; background: rgba(0,0,0,0.5); padding: 6px 14px; border-radius: 20px; white-space: nowrap; }
   </style>
@@ -112,17 +188,9 @@
     </ul>
   </nav>
 
-  <div id="tooltip">
-    <div class="tt-naam" id="tt-naam"></div>
-    <div class="tt-rij"><span class="tt-label" id="tt-l1"></span><span class="tt-waarde" id="tt-w1"></span></div>
-    <div class="tt-rij"><span class="tt-label" id="tt-l2"></span><span class="tt-waarde" id="tt-w2"></span></div>
-    <div class="tt-rij"><span class="tt-label" id="tt-l3"></span><span class="tt-waarde" id="tt-w3"></span></div>
-    <div class="tt-balk-bg"><div class="tt-balk-fill" id="tt-balk"></div></div>
-  </div>
-
-  <!-- Lightbox voor vergrote kaartweergave -->
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" onclick="sluitLightbox()">
-    <button class="lightbox-sluit" onclick="sluitLightbox()">×</button>
+    <button class="lightbox-sluit">×</button>
     <img id="lightbox-img" src="" alt="">
     <div class="lightbox-titel" id="lightbox-titel"></div>
   </div>
@@ -133,17 +201,13 @@
       <div class="proj-hero fade-1">
         <div class="breadcrumb">
           <a href="../index.html">Portfolio</a> ›
-          <a href="index.html">Jaar 1</a> ›
-          Blok 1 ›
-          <span>Demkaterrein</span>
+          <a href="index.html">Jaar 1</a> › Blok 1 › <span>Demkaterrein</span>
         </div>
         <h1 class="proj-titel">Demkaterrein — van bedrijventerrein naar woonwijk</h1>
         <div class="proj-meta">
-          <span>Jaar 1 · Blok 1</span>
-          <span>·</span>
-          <span>GIS-analyse &amp; ruimtelijke data</span>
-          <span>·</span>
-          <span class="badge badge-inter">interactieve kaart</span>
+          <span>Jaar 1 · Blok 1</span><span>·</span>
+          <span>GIS-analyse &amp; ruimtelijke data</span><span>·</span>
+          <span class="badge badge-inter">GIS-kaarten</span>
         </div>
       </div>
 
@@ -158,10 +222,8 @@
             met rijtjeshuizen, appartementen, groen, wadi's en fietspaden.
           </p>
           <p class="beschrijving">
-            Om onderbouwde keuzes te maken voor het ontwerp heb ik negen GIS-kaarten gemaakt van het
-            gebied en de omgeving. Denk aan de grondwaterstand, luchtkwaliteit, hitte-eiland effect,
-            wateroverlast en de afstand tot koelte. Die analyses vormen de basis voor de inrichting
-            van de wijk.
+            Om onderbouwde keuzes te maken heb ik negen GIS-kaarten gemaakt van het gebied en de omgeving —
+            van grondwaterstand en luchtkwaliteit tot hitte-eiland effect en wateroverlast.
           </p>
         </div>
         <div>
@@ -176,85 +238,138 @@
         </div>
       </div>
 
-      <!-- HUIDIG GEBIED vs ONTWERP -->
+      <!-- VOOR / NA -->
       <div class="sectie-h fade-2">Huidig gebied vs. ons ontwerp</div>
       <div class="voor-na fade-2">
         <div class="voor-na-kaart">
           <div class="voor-na-header">
-            <div class="dot" style="background:#E24B4A;"></div>
-            Huidig — bedrijventerrein (Google Maps)
+            <div class="dot" style="background:#E24B4A;"></div>Huidig — bedrijventerrein
           </div>
-          <img src="../afbeeldingen/demka/huidig_gebied.png" alt="Huidig Demkaterrein">
+          <img src="../afbeeldingen/demka/huidig_gebied.png" alt="Huidig Demkaterrein"
+               onclick="openLightbox(this.src,'Huidig Demkaterrein')">
         </div>
         <div class="voor-na-kaart">
           <div class="voor-na-header">
-            <div class="dot" style="background:#1D9E75;"></div>
-            Ons ontwerp — Het Demkapark
+            <div class="dot" style="background:#1D9E75;"></div>Ons ontwerp — Het Demkapark
           </div>
-          <img src="../afbeeldingen/demka/poster_demkapark.png" alt="Schetsontwerp Het Demkapark" onclick="openLightbox(this.src, 'Schetsontwerp — Het Demkapark')" style="cursor:zoom-in;">
+          <img src="../afbeeldingen/demka/poster_demkapark.png" alt="Schetsontwerp Het Demkapark"
+               onclick="openLightbox(this.src,'Schetsontwerp — Het Demkapark')">
         </div>
       </div>
 
-      <!-- INTERACTIEVE KAART -->
-<div class="kaart-wrap fade-3">
-  <div class="kaart-header">
-    <span>Demkaterrein · Utrecht — qgis2web export</span>
-    <span class="kaart-live">interactief</span>
-  </div>
-  <iframe
-    src="demka-kaart/index.html"
-    style="width:100%; height:500px; border:none; display:block;">
-  </iframe>
-</div>
-      <!-- KAARTENGALERIJ -->
-      <div class="sectie-h fade-3">Alle GIS-kaarten — klik om te vergroten</div>
-      <div class="kaarten-grid fade-3">
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/afstand_koelte.png','Afstand tot koelte')">
-          <img src="../afbeeldingen/demka/afstand_koelte.png" alt="Afstand tot koelte">
-          <div class="kaart-item-label">Afstand tot koelte<div class="kaart-item-sub">Klimaateffectatlas · 2025</div></div>
+      <!-- GIS KAARTVIEWER -->
+      <div class="sectie-h fade-3">GIS-kaarten — kies een kaart</div>
+      <div class="kaart-viewer fade-3">
+        <div class="kaart-viewer-header">
+          <span id="viewer-titel">Topografische kaart · Demkaterrein</span>
+          <span style="font-size:0.75rem;">klik op vergroten voor detail</span>
         </div>
+        <div class="kaart-viewer-body">
 
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/grondwaterstand.png','Grondwaterstand')">
-          <img src="../afbeeldingen/demka/grondwaterstand.png" alt="Grondwaterstand">
-          <div class="kaart-item-label">Grondwaterstand<div class="kaart-item-sub">Isofysen · 2012</div></div>
+          <!-- LINKER KANT: kaartafbeelding -->
+          <div class="kaart-afbeelding-wrap">
+            <img class="kaart-afbeelding" id="kaart-img"
+                 src="../afbeeldingen/demka/topografisch.png"
+                 alt="Kaart">
+            <div class="kaart-naam-label" id="kaart-naam-label">Topografische kaart · 2025</div>
+            <button class="kaart-zoom-knop" onclick="openLightbox(
+              document.getElementById('kaart-img').src,
+              document.getElementById('kaart-naam-label').textContent
+            )">⤢ vergroten</button>
+          </div>
+
+          <!-- RECHTER KANT: knoppen + legenda -->
+          <div class="kaart-paneel">
+            <div class="paneel-h">Kaarten</div>
+
+            <button class="kaart-knop actief" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/topografisch.png',
+              'Topografische kaart · 2025',
+              'Topografische kaart · Demkaterrein',
+              'topografisch'
+            )">
+              <div class="knop-kleur" style="background:#888;"></div>Topografisch
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/hitte_eiland.png',
+              'Stedelijk hitte-eiland effect · 2017',
+              'Hitte-eiland effect · Demkaterrein',
+              'hitte'
+            )">
+              <div class="knop-kleur" style="background:#E24B4A;"></div>Hitte-eiland
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/grondwaterstand.png',
+              'Grondwaterstand · 2012',
+              'Grondwaterstand · Demkaterrein',
+              'grondwater'
+            )">
+              <div class="knop-kleur" style="background:#1D9E75;"></div>Grondwaterstand
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/wateroverlast.png',
+              'Wateroverlast bij hevige bui · 2025',
+              'Wateroverlast · Demkaterrein',
+              'water'
+            )">
+              <div class="knop-kleur" style="background:#2563EB;"></div>Wateroverlast
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/luchtkwaliteit.png',
+              'Luchtkwaliteit NO₂ · 2021',
+              'Luchtkwaliteit NO₂ · Utrecht',
+              'lucht'
+            )">
+              <div class="knop-kleur" style="background:#F59E0B;"></div>Luchtkwaliteit
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/bevolkingsopbouw.png',
+              'Bevolkingsopbouw naar inkomen · 2021',
+              'Bevolkingsopbouw · Demkaterrein',
+              'bevolking'
+            )">
+              <div class="knop-kleur" style="background:#1A3F6B;"></div>Bevolkingsopbouw
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/groen_bomen.png',
+              'Openbare groen en bomen · 2025',
+              'Groen en bomen · Demkaterrein',
+              'groen'
+            )">
+              <div class="knop-kleur" style="background:#16A34A;"></div>Groen &amp; bomen
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/riolering.png',
+              'Riolering en oppervlaktewater · 2024',
+              'Riolering · Demkaterrein',
+              'riolering'
+            )">
+              <div class="knop-kleur" style="background:#7C3AED;"></div>Riolering
+            </button>
+
+            <button class="kaart-knop" onclick="wisselKaart(this,
+              '../afbeeldingen/demka/afstand_koelte.png',
+              'Afstand tot koelte · 2025',
+              'Afstand tot koelte · Demkaterrein',
+              'koelte'
+            )">
+              <div class="knop-kleur" style="background:#534AB7;"></div>Afstand koelte
+            </button>
+
+            <!-- Legenda: verandert mee met de actieve kaart -->
+            <div class="paneel-h">Legenda</div>
+            <div class="legenda-blok" id="legenda-blok">
+              <!-- Wordt gevuld door JavaScript -->
+            </div>
+          </div>
         </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/hitte_eiland.png','Stedelijk hitte-eiland effect')">
-          <img src="../afbeeldingen/demka/hitte_eiland.png" alt="Hitte-eiland effect">
-          <div class="kaart-item-label">Stedelijk hitte-eiland effect<div class="kaart-item-sub">Klimaatadaptatie · 2017</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/wateroverlast.png','Wateroverlast bij hevige bui')">
-          <img src="../afbeeldingen/demka/wateroverlast.png" alt="Wateroverlast">
-          <div class="kaart-item-label">Wateroverlast bij hevige bui<div class="kaart-item-sub">70mm/2 uur · 2025</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/luchtkwaliteit.png','Luchtkwaliteit NO₂')">
-          <img src="../afbeeldingen/demka/luchtkwaliteit.png" alt="Luchtkwaliteit NO2">
-          <div class="kaart-item-label">Luchtkwaliteit NO₂<div class="kaart-item-sub">Utrecht · 2021</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/bevolkingsopbouw.png','Bevolkingsopbouw naar inkomen')">
-          <img src="../afbeeldingen/demka/bevolkingsopbouw.png" alt="Bevolkingsopbouw">
-          <div class="kaart-item-label">Bevolkingsopbouw naar inkomen<div class="kaart-item-sub">Demka terrein · 2021</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/groen_bomen.png','Openbare groen en bomen')">
-          <img src="../afbeeldingen/demka/groen_bomen.png" alt="Groen en bomen">
-          <div class="kaart-item-label">Openbare groen en bomen<div class="kaart-item-sub">Demka terrein · 2025</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/riolering.png','Riolering en oppervlaktewater')">
-          <img src="../afbeeldingen/demka/riolering.png" alt="Riolering">
-          <div class="kaart-item-label">Riolering en oppervlaktewater<div class="kaart-item-sub">Demka terrein · 2024</div></div>
-        </div>
-
-        <div class="kaart-item" onclick="openLightbox('../afbeeldingen/demka/topografisch.png','Topografische kaart')">
-          <img src="../afbeeldingen/demka/topografisch.png" alt="Topografische kaart">
-          <div class="kaart-item-label">Topografische kaart<div class="kaart-item-sub">Demka terrein · 2025</div></div>
-        </div>
-
       </div>
 
       <div class="proj-nav fade-4">
@@ -274,124 +389,90 @@
   </footer>
 
   <script>
-    const lagen = {
-      koelte: {
-        kleur: '#534AB7',
-        legenda: [{ label:'Dichtbij (0-200m)', kleur:'#534AB7' },{ label:'Matig (200-400m)', kleur:'#AFA9EC' },{ label:'Ver (500m+)', kleur:'#EEEDFE' }],
-        zones: [
-          { naam:'Zone A — Kanaalzone',    x:.05, y:.1,  b:.35, h:.32, vulling:'#534AB7', stats:['Afstand tot park','120 m','Schaduwdekking','68%','Score','Hoog'],  balk:85 },
-          { naam:'Zone B — Centrumgebied', x:.45, y:.08, b:.3,  h:.35, vulling:'#AFA9EC', stats:['Afstand tot park','340 m','Schaduwdekking','31%','Score','Matig'], balk:45 },
-          { naam:'Zone C — Zuidrand',      x:.1,  y:.5,  b:.4,  h:.34, vulling:'#d4d0f5', stats:['Afstand tot park','580 m','Schaduwdekking','12%','Score','Laag'],  balk:18 },
-          { naam:'Zone D — Oosthoek',      x:.62, y:.48, b:.3,  h:.38, vulling:'#7F77DD', stats:['Afstand tot park','210 m','Schaduwdekking','54%','Score','Goed'],  balk:65 }
-        ]
-      },
-      grondwater: {
-        kleur: '#1D9E75',
-        legenda: [{ label:'Ondiep -0.8m', kleur:'#1D9E75' },{ label:'Middel -1.6m', kleur:'#5DCAA5' },{ label:'Diep -2.4m', kleur:'#9FE1CB' }],
-        zones: [
-          { naam:'Zone A — Kanaalzone',    x:.05, y:.1,  b:.35, h:.32, vulling:'#1D9E75', stats:['Grondwaterstand','-0.8 m','Risico','Hoog',   'Drainage','Actief'],  balk:80 },
-          { naam:'Zone B — Centrumgebied', x:.45, y:.08, b:.3,  h:.35, vulling:'#5DCAA5', stats:['Grondwaterstand','-1.6 m','Risico','Middel',  'Drainage','Passief'], balk:50 },
-          { naam:'Zone C — Zuidrand',      x:.1,  y:.5,  b:.4,  h:.34, vulling:'#9FE1CB', stats:['Grondwaterstand','-2.4 m','Risico','Laag',    'Drainage','Geen'],    balk:20 },
-          { naam:'Zone D — Oosthoek',      x:.62, y:.48, b:.3,  h:.38, vulling:'#5DCAA5', stats:['Grondwaterstand','-1.1 m','Risico','Middel',  'Drainage','Actief'],  balk:60 }
-        ]
-      },
-      hitte: {
-        kleur: '#E24B4A',
-        legenda: [{ label:'Hoog effect >2.4°', kleur:'#8B1C1C' },{ label:'Middel 1.6-2.0°', kleur:'#E24B4A' },{ label:'Laag <1.2°', kleur:'#F5A89A' }],
-        zones: [
-          { naam:'Zone A — Kanaalzone',    x:.05, y:.1,  b:.35, h:.32, vulling:'#E24B4A', stats:['Hitte-effect','1.8°C','Type','Bebouwd','Risico','Middel'], balk:65 },
-          { naam:'Zone B — Centrumgebied', x:.45, y:.08, b:.3,  h:.35, vulling:'#8B1C1C', stats:['Hitte-effect','2.6°C','Type','Dicht bebouwd','Risico','Hoog'], balk:88 },
-          { naam:'Zone C — Zuidrand',      x:.1,  y:.5,  b:.4,  h:.34, vulling:'#F5A89A', stats:['Hitte-effect','1.1°C','Type','Gemengd','Risico','Laag'], balk:35 },
-          { naam:'Zone D — Oosthoek',      x:.62, y:.48, b:.3,  h:.38, vulling:'#E24B4A', stats:['Hitte-effect','2.0°C','Type','Bebouwd','Risico','Middel'], balk:70 }
-        ]
-      },
-      bevolking: {
-        kleur: '#BA7517',
-        legenda: [{ label:'Hoog inkomen €30k', kleur:'#EEE8D5' },{ label:'Middel €25-27k', kleur:'#7FAAD0' },{ label:'Laag €24k', kleur:'#1A3F6B' }],
-        zones: [
-          { naam:'Zone A — Kanaalzone',    x:.05, y:.1,  b:.35, h:.32, vulling:'#7FAAD0', stats:['Inkomen/jaar','€25.000','Bewoners/ha','48','Leeftijd gem.','38 jr'], balk:55 },
-          { naam:'Zone B — Centrumgebied', x:.45, y:.08, b:.3,  h:.35, vulling:'#1A3F6B', stats:['Inkomen/jaar','€24.000','Bewoners/ha','72','Leeftijd gem.','42 jr'], balk:75 },
-          { naam:'Zone C — Zuidrand',      x:.1,  y:.5,  b:.4,  h:.34, vulling:'#EEE8D5', stats:['Inkomen/jaar','€30.000','Bewoners/ha','21','Leeftijd gem.','35 jr'], balk:30 },
-          { naam:'Zone D — Oosthoek',      x:.62, y:.48, b:.3,  h:.38, vulling:'#7FAAD0', stats:['Inkomen/jaar','€27.000','Bewoners/ha','35','Leeftijd gem.','40 jr'], balk:50 }
-        ]
-      },
-      water: {
-        kleur: '#2563EB',
-        legenda: [{ label:'>30cm waterdiepte', kleur:'#1E3A8A' },{ label:'15-30cm', kleur:'#2563EB' },{ label:'5-15cm', kleur:'#93C5FD' }],
-        zones: [
-          { naam:'Zone A — Kanaalzone',    x:.05, y:.1,  b:.35, h:.32, vulling:'#1E3A8A', stats:['Waterdiepte','>30 cm','Bui','70mm/2u','Risico','Hoog'],   balk:90 },
-          { naam:'Zone B — Centrumgebied', x:.45, y:.08, b:.3,  h:.35, vulling:'#2563EB', stats:['Waterdiepte','20 cm',  'Bui','70mm/2u','Risico','Middel'], balk:60 },
-          { naam:'Zone C — Zuidrand',      x:.1,  y:.5,  b:.4,  h:.34, vulling:'#93C5FD', stats:['Waterdiepte','8 cm',   'Bui','70mm/2u','Risico','Laag'],   balk:20 },
-          { naam:'Zone D — Oosthoek',      x:.62, y:.48, b:.3,  h:.38, vulling:'#2563EB', stats:['Waterdiepte','18 cm',  'Bui','70mm/2u','Risico','Middel'], balk:55 }
-        ]
-      }
+    // Legenda-data per kaart
+    const legendas = {
+      topografisch: [],
+      hitte: [
+        { kleur:'#4db3e6', label:'≤ 0,40' },
+        { kleur:'#9fd4ef', label:'0,40 – 0,80' },
+        { kleur:'#d4eaf7', label:'0,80 – 1,20' },
+        { kleur:'#fdd49e', label:'1,20 – 1,60' },
+        { kleur:'#fc8d59', label:'1,60 – 2,00' },
+        { kleur:'#e34a33', label:'2,00 – 2,40' },
+        { kleur:'#8b1a1a', label:'> 2,40' },
+      ],
+      grondwater: [
+        { kleur:'#084594', label:'Ondiep (hoog risico)' },
+        { kleur:'#2171b5', label:'Middel' },
+        { kleur:'#6baed6', label:'Normaal' },
+        { kleur:'#bdd7e7', label:'Diep' },
+      ],
+      water: [
+        { kleur:'#08306b', label:'> 30 cm' },
+        { kleur:'#2171b5', label:'15 – 30 cm' },
+        { kleur:'#6baed6', label:'5 – 15 cm' },
+        { kleur:'#c6dbef', label:'< 5 cm' },
+      ],
+      lucht: [
+        { kleur:'#fff5f0', label:'≤ 9 µg/m³' },
+        { kleur:'#fee0d2', label:'9 – 15 µg/m³' },
+        { kleur:'#fcbba1', label:'15 – 22 µg/m³' },
+        { kleur:'#fc9272', label:'22 – 28 µg/m³' },
+        { kleur:'#fb6a4a', label:'28 – 34 µg/m³' },
+        { kleur:'#ef3b2c', label:'34 – 41 µg/m³' },
+        { kleur:'#99000d', label:'> 41 µg/m³' },
+      ],
+      bevolking: [
+        { kleur:'#c6dbef', label:'€ 30.000 (hoog)' },
+        { kleur:'#6baed6', label:'€ 28.000' },
+        { kleur:'#2171b5', label:'€ 27.000' },
+        { kleur:'#084594', label:'€ 25.000' },
+        { kleur:'#08306b', label:'€ 24.000 (laag)' },
+      ],
+      groen: [
+        { kleur:'#238b45', label:'Openbaar groen' },
+        { kleur:'#74c476', label:'Groenstroken' },
+        { kleur:'#6b3a2a', label:'Bomen' },
+      ],
+      riolering: [
+        { kleur:'#7C3AED', label:'Rioolleiding' },
+        { kleur:'#2563EB', label:'Oppervlaktewater' },
+      ],
+      koelte: [
+        { kleur:'#534AB7', label:'Dichtbij (0 – 200 m)' },
+        { kleur:'#AFA9EC', label:'Matig (200 – 500 m)' },
+        { kleur:'#EEEDFE', label:'Ver (> 500 m)' },
+      ],
     };
 
-    let actieveLaag = 'koelte', hoverZone = null;
-    const canvas = document.getElementById('kaartCanvas');
-    const ctx = canvas.getContext('2d');
+    function wisselKaart(knop, src, label, titel, key) {
+      // Kaartafbeelding wisselen met fade
+      var img = document.getElementById('kaart-img');
+      img.style.opacity = '0';
+      setTimeout(function() {
+        img.src = src;
+        img.style.opacity = '1';
+      }, 200);
 
-    function tekenKaart() {
-      const W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#d8e8d8'; ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1.5;
-      for (let x = 0; x < W; x += 80) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-      for (let y = 0; y < H; y += 80) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-      ctx.strokeStyle = 'rgba(255,255,255,0.7)'; ctx.lineWidth = 5;
-      ctx.beginPath(); ctx.moveTo(0, H*.47); ctx.lineTo(W, H*.47); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(W*.43, 0); ctx.lineTo(W*.43, H); ctx.stroke();
-      lagen[actieveLaag].zones.forEach((z, i) => {
-        const x=z.x*W, y=z.y*H, b=z.b*W, h=z.h*H;
-        ctx.beginPath(); ctx.roundRect(x,y,b,h,8);
-        ctx.fillStyle = hoverZone===i ? z.vulling : z.vulling+'cc'; ctx.fill();
-        if (hoverZone===i) { ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.stroke(); }
-        ctx.fillStyle='rgba(255,255,255,0.85)';
-        ctx.font=`500 ${Math.round(W*.011)}px Outfit,sans-serif`;
-        ctx.fillText(z.naam.split('—')[0].trim(), x+10, y+20);
-      });
-    }
+      // Label en titel bijwerken
+      document.getElementById('kaart-naam-label').textContent = label;
+      document.getElementById('viewer-titel').textContent = titel;
 
-    function updateLegenda() {
-      document.getElementById('legenda').innerHTML = lagen[actieveLaag].legenda.map(l =>
-        `<div class="leg-item"><div class="leg-bol" style="background:${l.kleur}"></div>${l.label}</div>`
-      ).join('');
-    }
-
-    function wisselLaag(naam, knop) {
-      actieveLaag = naam;
-      document.querySelectorAll('.laag-knop').forEach(k => k.classList.remove('actief'));
+      // Actieve knop bijwerken
+      document.querySelectorAll('.kaart-knop').forEach(k => k.classList.remove('actief'));
       knop.classList.add('actief');
-      hoverZone = null; tekenKaart(); updateLegenda();
-      document.getElementById('tooltip').style.display='none';
+
+      // Legenda bijwerken
+      var items = legendas[key] || [];
+      var html = items.length === 0
+        ? '<div style="font-size:0.78rem;color:var(--tekst-zacht);">Geen legenda beschikbaar</div>'
+        : items.map(function(item) {
+            return '<div class="leg-item"><div class="leg-kleur" style="background:' + item.kleur + ';"></div>' + item.label + '</div>';
+          }).join('');
+      document.getElementById('legenda-blok').innerHTML = html;
     }
 
-    canvas.addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      const mx=(e.clientX-rect.left)/rect.width, my=(e.clientY-rect.top)/rect.height;
-      const zones = lagen[actieveLaag].zones;
-      let gevonden = null;
-      zones.forEach((z,i) => { if(mx>=z.x&&mx<=z.x+z.b&&my>=z.y&&my<=z.y+z.h) gevonden=i; });
-      if (gevonden !== null) {
-        const z = zones[gevonden]; hoverZone=gevonden; tekenKaart();
-        document.getElementById('tt-naam').textContent=z.naam;
-        document.getElementById('tt-l1').textContent=z.stats[0]; document.getElementById('tt-w1').textContent=z.stats[1];
-        document.getElementById('tt-l2').textContent=z.stats[2]; document.getElementById('tt-w2').textContent=z.stats[3];
-        document.getElementById('tt-l3').textContent=z.stats[4]; document.getElementById('tt-w3').textContent=z.stats[5];
-        const balk=document.getElementById('tt-balk');
-        balk.style.width=z.balk+'%'; balk.style.background=lagen[actieveLaag].kleur;
-        const tt=document.getElementById('tooltip'); tt.style.display='block';
-        let tx=e.clientX+14, ty=e.clientY+14;
-        if(tx+180>window.innerWidth) tx=e.clientX-190;
-        if(ty+140>window.innerHeight) ty=e.clientY-145;
-        tt.style.left=tx+'px'; tt.style.top=ty+'px';
-      } else {
-        if(hoverZone!==null){hoverZone=null;tekenKaart();}
-        document.getElementById('tooltip').style.display='none';
-      }
-    });
-    canvas.addEventListener('mouseleave',()=>{ hoverZone=null; tekenKaart(); document.getElementById('tooltip').style.display='none'; });
-
+    // Lightbox
     function openLightbox(src, titel) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox-titel').textContent = titel;
@@ -400,9 +481,13 @@
     function sluitLightbox() {
       document.getElementById('lightbox').classList.remove('open');
     }
-    document.addEventListener('keydown', e => { if(e.key==='Escape') sluitLightbox(); });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') sluitLightbox();
+    });
 
-    tekenKaart(); updateLegenda();
+    // Eerste legenda laden (topografisch heeft geen legenda)
+    document.getElementById('legenda-blok').innerHTML =
+      '<div style="font-size:0.78rem;color:var(--tekst-zacht);">Geen legenda beschikbaar</div>';
   </script>
 
 </body>
