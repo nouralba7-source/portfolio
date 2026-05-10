@@ -1,106 +1,121 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Built Environment Portfolio</title>
-
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
-
-  
   <style>
-
-    
     .hero {
       padding: 5rem 0 4rem;
       display: flex;
       align-items: center;
       gap: 2.5rem;
     }
-
-    /* De profielfoto */
     .avatar {
-      width: 90px;
-      height: 90px;
+      width: 90px; height: 90px;
       border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
+      object-fit: cover; object-position: center top;
       flex-shrink: 0;
       border: 3px solid var(--paars-licht);
     }
+    .hero-naam      { font-size: 2rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.25rem; }
+    .hero-opleiding { font-size: 0.95rem; color: var(--paars); font-weight: 500; margin-bottom: 0.75rem; }
+    .hero-bio       { font-size: 0.95rem; color: var(--tekst-zacht); max-width: 500px; margin-bottom: 1rem; }
+    .pills          { display: flex; flex-wrap: wrap; gap: 6px; }
 
-    .hero-naam {
-      font-size: 2rem;
+    /* ── STATS (animerende tellers) ────────────────────────── */
+    .stats-rij {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 2.5rem;
+    }
+    .stat-kaart {
+      background: var(--wit);
+      border: 1px solid var(--rand);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .stat-kaart:hover {
+      border-color: var(--paars);
+      box-shadow: 0 2px 12px rgba(90,80,200,0.08);
+    }
+    .stat-getal {
+      font-size: 1.8rem;
       font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-opleiding {
-      font-size: 0.95rem;
       color: var(--paars);
-      font-weight: 500;
-      margin-bottom: 0.75rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
+    .stat-eenheid { font-size: 1rem; font-weight: 400; color: var(--paars); }
+    .stat-omschrijving { font-size: 0.78rem; color: var(--tekst-zacht); margin-top: 4px; }
 
-    .hero-bio {
-      font-size: 0.95rem;
-      color: var(--tekst-zacht);
-      max-width: 500px;
-      margin-bottom: 1rem;
-    }
-
-    /* De rij met skills-pills */
-    .pills {
+    /* ── FILTER ────────────────────────────────────────────── */
+    .filter-balk {
       display: flex;
-      flex-wrap: wrap;
       gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+      align-items: center;
+    }
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tekst-zacht);
+      margin-right: 4px;
+    }
+    .filter-btn {
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--rand);
+      background: var(--wit);
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--tekst-zacht);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover  { border-color: var(--paars); color: var(--paars); }
+    .filter-btn.actief {
+      background: var(--paars);
+      border-color: var(--paars);
+      color: white;
+    }
+    .filter-btn.reset  { border-color: transparent; color: var(--tekst-zacht); }
+    .filter-btn.reset:hover { color: var(--paars); }
+
+    /* kaart dimmen als niet actieve filter */
+    .project-kaart { transition: background 0.15s, opacity 0.25s, transform 0.25s; }
+    .project-kaart.verborgen {
+      opacity: 0.2;
+      pointer-events: none;
+      transform: scale(0.97);
     }
 
-    .jaar-sectie {
-      margin-bottom: 3rem;
-    }
-
-    /* De gekleurde koptekst van een jaarblok */
-    .jaar-header {
+    /* ── JAAR BLOKKEN ───────────────────────────────────────── */
+    .jaar-sectie  { margin-bottom: 3rem; }
+    .jaar-header  {
       padding: 1rem 1.25rem;
       border-radius: var(--radius) var(--radius) 0 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       border: 1px solid transparent;
     }
-
-    .jaar-header.jaar1 {
-      background: var(--paars-licht);
-      border-color: #d4d0f5;
-    }
-
-    .jaar-header.jaar2 {
-      background: var(--groen-licht);
-      border-color: #b0dece;
-    }
-
-    .jaar-header h2 {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
+    .jaar-header.jaar1  { background: var(--paars-licht); border-color: #d4d0f5; }
+    .jaar-header.jaar2  { background: var(--groen-licht);  border-color: #b0dece; }
+    .jaar-header h2     { font-size: 1rem; font-weight: 600; }
     .jaar-header.jaar1 h2 { color: var(--paars-donker); }
     .jaar-header.jaar2 h2 { color: #0F6E56; }
-
-    .jaar-header span {
-      font-size: 0.8rem;
-    }
+    .jaar-header span   { font-size: 0.8rem; }
     .jaar-header.jaar1 span { color: var(--paars); }
     .jaar-header.jaar2 span { color: var(--groen); }
 
-  
     .projecten-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -109,8 +124,6 @@
       border-radius: 0 0 var(--radius) var(--radius);
       overflow: hidden;
     }
-
-    /* Eén projectkaart in het grid */
     .project-kaart {
       padding: 1.1rem 1.25rem;
       border-right: 1px solid var(--rand);
@@ -118,55 +131,26 @@
       text-decoration: none;
       color: inherit;
       background: var(--wit);
-      transition: background 0.15s;
       display: block;
     }
+    .project-kaart:last-child  { border-right: none; }
+    .project-kaart:hover       { background: #f5f4ff; }
+    .kaart-top    { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; }
+    .kaart-blok   { font-size: 0.7rem; color: var(--tekst-zacht); margin-bottom: 0.2rem; }
+    .kaart-titel  { font-size: 0.9rem; font-weight: 500; color: var(--tekst); }
+    .kaart-sub    { font-size: 0.8rem; color: var(--tekst-zacht); margin-top: 0.2rem; }
+    .kaart-tags   { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.5rem; }
+    .kaart-tag    { font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; background: var(--paars-licht); color: var(--paars-donker); }
 
-    
-    .project-kaart:last-child { border-right: none; }
-
-    .project-kaart:hover { background: #f5f4ff; }
-
-    .kaart-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.4rem;
-    }
-
-    .kaart-blok {
-      font-size: 0.7rem;
-      color: var(--tekst-zacht);
-      margin-bottom: 0.2rem;
-    }
-
-    .kaart-titel {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--tekst);
-    }
-
-    .kaart-sub {
-      font-size: 0.8rem;
-      color: var(--tekst-zacht);
-      margin-top: 0.2rem;
-    }
-
-    
     .sectie-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--tekst-zacht);
-      margin-bottom: 0.75rem;
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--tekst-zacht); margin-bottom: 0.75rem;
     }
   </style>
 </head>
-
 <body>
 
- 
   <nav class="nav">
     <a href="index.html" class="nav-logo">Built Environment Portfolio</a>
     <ul class="nav-links">
@@ -176,118 +160,171 @@
     </ul>
   </nav>
 
- 
   <main>
     <div class="container">
 
-     
+      <!-- HERO -->
       <section class="hero">
-        <img src="afbeeldingen/abdennour.jpg" alt="Abdennour el Banihiati" class="avatar fade-1">
+        <img src="afbeeldingen/abdennour.jpg" alt="Abdennour el Banihiati" class="avatar fade-1"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="avatar-initialen fade-1" style="display:none;">AB</div>
         <div>
-         
           <h1 class="hero-naam fade-2">Abdennour el Banihiati</h1>
-          <div class="hero-opleiding fade-2">Data-gedreven Built Environment</div>
+          <div class="hero-opleiding fade-2">Data-gedreven Built Environment · Hogeschool Utrecht</div>
           <p class="hero-bio fade-3">
-            Student aan de Hogeschool Utrecht, jaar 2. Ik werk met GIS, Python, parametrisch
-            ontwerpen en data-visualisatie om ruimtelijke vraagstukken op te lossen.
+            Student jaar 2. Ik combineer GIS, data-analyse en digitaal bouwen
+            om ruimtelijke vraagstukken inzichtelijk te maken — van energietransitie
+            op wijkniveau tot real-time sensormonitoring.
           </p>
-         
           <div class="pills fade-4">
             <span class="pill pill-paars">Python</span>
-            <span class="pill pill-groen">GIS</span>
+            <span class="pill pill-groen">QGIS</span>
             <span class="pill pill-amber">Revit</span>
-            <span class="pill pill-paars">Grafana</span>
+            <span class="pill pill-groen">Grafana</span>
+            <span class="pill pill-paars">BIM</span>
+            <span class="pill pill-amber">Tygron</span>
             <span class="pill pill-groen">Data-analyse</span>
-            <span class="pill pill-amber">Parametrisch ontwerpen</span>
           </div>
         </div>
       </section>
 
- 
+      <!-- STATS (animerende tellers) -->
+      <div class="stats-rij" id="stats-rij">
+        <div class="stat-kaart">
+          <div class="stat-getal"><span class="teller" data-doel="5">0</span></div>
+          <div class="stat-omschrijving">projecten afgerond</div>
+        </div>
+        <div class="stat-kaart">
+          <div class="stat-getal"><span class="teller" data-doel="2">0</span></div>
+          <div class="stat-omschrijving">jaar HBO-opleiding</div>
+        </div>
+        <div class="stat-kaart">
+          <div class="stat-getal">
+            <span class="teller" data-doel="244">0</span><span class="stat-eenheid">.500 m²</span>
+          </div>
+          <div class="stat-omschrijving">plangebied ontworpen</div>
+        </div>
+        <div class="stat-kaart">
+          <div class="stat-getal"><span class="teller" data-doel="11">0</span></div>
+          <div class="stat-omschrijving">sensoren gemonitord</div>
+        </div>
+      </div>
+
+      <!-- FILTER -->
+      <div class="filter-balk fade-3" id="filter-balk">
+        <span class="filter-label">Filter op tool:</span>
+        <button class="filter-btn reset actief" data-filter="alles" onclick="setFilter(this)">Alle projecten</button>
+        <button class="filter-btn" data-filter="QGIS"    onclick="setFilter(this)">QGIS</button>
+        <button class="filter-btn" data-filter="Python"  onclick="setFilter(this)">Python</button>
+        <button class="filter-btn" data-filter="Revit"   onclick="setFilter(this)">Revit</button>
+        <button class="filter-btn" data-filter="Tygron"  onclick="setFilter(this)">Tygron</button>
+        <button class="filter-btn" data-filter="BIM"     onclick="setFilter(this)">BIM</button>
+        <button class="filter-btn" data-filter="Grafana" onclick="setFilter(this)">Grafana</button>
+      </div>
+
+      <!-- JAAR 1 -->
       <section class="jaar-sectie fade-3" id="jaar1">
         <div class="sectie-label">Jaar 1</div>
-
         <div class="jaar-header jaar1">
           <h2>Jaar 1 — 2024/2025</h2>
           <span>3 projecten</span>
         </div>
-
         <div class="projecten-grid">
 
-          
-          <a href="jaar1/demkaterrein.html" class="project-kaart">
+          <a href="jaar1/demkaterrein.html" class="project-kaart"
+             data-skills="QGIS Python GIS Folium">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 1</div>
                 <div class="kaart-titel">Demkaterrein</div>
               </div>
-            
               <span class="badge badge-inter">interactief</span>
             </div>
             <div class="kaart-sub">GIS-kaarten ruimtelijke analyse · meerdere kaartlagen</div>
+            <div class="kaart-tags">
+              <span class="kaart-tag">QGIS</span>
+              <span class="kaart-tag">Python</span>
+              <span class="kaart-tag">GIS</span>
+            </div>
           </a>
 
-          <!-- PROJECT: Tiny House -->
-          <a href="jaar1/tinyhouse.html" class="project-kaart">
+          <a href="jaar1/tinyhouse.html" class="project-kaart"
+             data-skills="Revit 3D">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 2</div>
                 <div class="kaart-titel">Tiny House</div>
               </div>
-              <!-- badge-3d = paars "3D" labeltje -->
               <span class="badge badge-3d">3D</span>
             </div>
             <div class="kaart-sub">Revit — ontwerp &amp; modellering</div>
+            <div class="kaart-tags">
+              <span class="kaart-tag">Revit</span>
+              <span class="kaart-tag">3D</span>
+            </div>
           </a>
 
-          <!-- PROJECT: Overvecht -->
-          <a href="jaar1/overvecht.html" class="project-kaart">
+          <a href="jaar1/overvecht.html" class="project-kaart"
+             data-skills="QGIS Tygron Revit GIS">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 3</div>
                 <div class="kaart-titel">Overvecht</div>
               </div>
+              <span class="badge badge-inter">slider</span>
             </div>
-            <div class="kaart-sub">Energieduurzamer maken van bestaande wijk</div>
+            <div class="kaart-sub">Verduurzaming &amp; herinrichting bestaande wijk</div>
+            <div class="kaart-tags">
+              <span class="kaart-tag">QGIS</span>
+              <span class="kaart-tag">Tygron</span>
+              <span class="kaart-tag">Revit</span>
+            </div>
           </a>
 
         </div>
       </section>
 
-      <!-- =====================
-           JAAR 2
-      ===================== -->
+      <!-- JAAR 2 -->
       <section class="jaar-sectie fade-4" id="jaar2">
         <div class="sectie-label">Jaar 2</div>
-
         <div class="jaar-header jaar2">
           <h2>Jaar 2 — 2025/2026</h2>
           <span>2 projecten</span>
         </div>
-
         <div class="projecten-grid">
 
-          <!-- PROJECT: Tuinwijk -->
-          <a href="jaar2/tuinwijk.html" class="project-kaart">
+          <a href="jaar2/tuinwijk.html" class="project-kaart"
+             data-skills="Revit BIM 3D Navisworks">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 1</div>
                 <div class="kaart-titel">Tuinwijk</div>
               </div>
+              <span class="badge badge-3d">3D</span>
             </div>
-            <div class="kaart-sub">Energie neutraal gebied</div>
+            <div class="kaart-sub">Energieneutraal wijk — BIM &amp; 4D-planning</div>
+            <div class="kaart-tags">
+              <span class="kaart-tag">Revit</span>
+              <span class="kaart-tag">BIM</span>
+              <span class="kaart-tag">Navisworks</span>
+            </div>
           </a>
 
-          <!-- PROJECT: Testunit USP -->
-          <a href="jaar2/testunit.html" class="project-kaart">
+          <a href="jaar2/testunit.html" class="project-kaart"
+             data-skills="Python Grafana Data">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 2</div>
                 <div class="kaart-titel">Testunit USP Dak</div>
               </div>
-              <span class="badge badge-inter">interactief</span>
+              <span class="badge badge-inter">live data</span>
             </div>
-            <div class="kaart-sub">Live meetdata dashboard</div>
+            <div class="kaart-sub">Sensordata dashboard &amp; digital twin</div>
+            <div class="kaart-tags">
+              <span class="kaart-tag">Python</span>
+              <span class="kaart-tag">Grafana</span>
+              <span class="kaart-tag">Data</span>
+            </div>
           </a>
 
         </div>
@@ -296,7 +333,6 @@
     </div>
   </main>
 
-
   <footer>
     <span>Built Environment Portfolio — 2026</span>
     <div style="display:flex; gap:1.5rem;">
@@ -304,6 +340,50 @@
       <a href="https://github.com/jouwgebruikersnaam" target="_blank">GitHub</a>
     </div>
   </footer>
+
+  <script>
+    /* ── ANIMERENDE TELLERS ─────────────────────────────────── */
+    function animeerTeller(el) {
+      const doel = parseInt(el.dataset.doel, 10);
+      const duur = 1400;
+      const stap = 16;
+      const stappen = duur / stap;
+      let huidig = 0;
+      const interval = setInterval(() => {
+        huidig += doel / stappen;
+        if (huidig >= doel) { huidig = doel; clearInterval(interval); }
+        el.textContent = Math.floor(huidig).toLocaleString('nl-NL');
+      }, stap);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.teller').forEach(animeerTeller);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(document.getElementById('stats-rij'));
+
+    /* ── SKILLS FILTER ──────────────────────────────────────── */
+    function setFilter(btn) {
+      // Alle knoppen resetten
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('actief'));
+      btn.classList.add('actief');
+
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-kaart').forEach(kaart => {
+        if (filter === 'alles') {
+          kaart.classList.remove('verborgen');
+        } else {
+          const skills = kaart.dataset.skills || '';
+          kaart.classList.toggle('verborgen', !skills.includes(filter));
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>

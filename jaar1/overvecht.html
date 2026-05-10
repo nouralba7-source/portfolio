@@ -16,13 +16,6 @@
     .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1rem; }
     .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
 
-    /* Grote voor/na vergelijking */
-    .voor-na { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-    .voor-na-kaart { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; }
-    .voor-na-header { padding: 8px 14px; background: #f5f5f5; border-bottom: 1px solid var(--rand); font-size: 0.8rem; font-weight: 500; color: var(--tekst-zacht); display: flex; align-items: center; gap: 6px; }
-    .voor-na-header .dot { width: 8px; height: 8px; border-radius: 50%; }
-    .voor-na-kaart img { width: 100%; display: block; object-fit: cover; height: 300px; cursor: zoom-in; }
-
     /* Layout */
     .layout-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
 
@@ -50,6 +43,89 @@
     .bijdrage-items { display: flex; flex-direction: column; gap: 5px; }
     .bijdrage-item { font-size: 0.85rem; color: var(--tekst-zacht); display: flex; gap: 8px; }
     .bijdrage-item::before { content: '→'; color: var(--paars); font-weight: 600; }
+
+    /* ── VOOR/NA SLIDER ─────────────────────────────────────── */
+    .slider-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/7;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--rand);
+      cursor: ew-resize;
+      user-select: none;
+      margin-bottom: 2.5rem;
+    }
+    .slider-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-overlay {
+      position: absolute;
+      inset: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+    .slider-voor {
+      width: auto;
+      min-width: 100%;
+      max-width: none;
+    }
+    .slider-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .handle-lijn {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%; transform: translateX(-50%);
+      width: 2px;
+      background: white;
+      box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+    .handle-knop {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: var(--tekst);
+      z-index: 1;
+    }
+    .slider-label {
+      position: absolute;
+      top: 12px;
+      z-index: 5;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .slider-label-voor {
+      left: 12px;
+      background: rgba(220,50,50,0.85);
+      color: white;
+    }
+    .slider-label-na {
+      right: 12px;
+      background: rgba(15,110,86,0.85);
+      color: white;
+    }
 
     /* Lightbox */
     .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
@@ -165,24 +241,22 @@
         </div>
       </div>
 
-      <!-- VOOR / NA TYGRON -->
-      <div class="sectie-h fade-3">3D visualisatie — huidig vs. ontwerp (Tygron)</div>
-      <div class="voor-na fade-3">
-        <div class="voor-na-kaart">
-          <div class="voor-na-header">
-            <div class="dot" style="background:#E24B4A;"></div>
-            Huidig — bestaande situatie
-          </div>
-          <img src="../afbeeldingen/overvecht/tygron_voor.png" alt="Tygron bestaande situatie"
-               onclick="openLightbox(this.src,'Tygron — bestaande situatie')">
+      <!-- VOOR / NA TYGRON SLIDER -->
+      <div class="sectie-h fade-3">3D visualisatie — sleep de slider om huidig vs. ontwerp te vergelijken (Tygron)</div>
+      <div class="slider-wrap fade-3" id="sliderWrap">
+        <div class="slider-label slider-label-voor">◀ Huidig</div>
+        <div class="slider-label slider-label-na">Ontwerp ▶</div>
+        <img class="slider-img slider-na"
+             src="../afbeeldingen/overvecht/tygron_na.png"
+             alt="Tygron nieuwe situatie">
+        <div class="slider-overlay" id="sliderOverlay">
+          <img class="slider-img slider-voor"
+               src="../afbeeldingen/overvecht/tygron_voor.png"
+               alt="Tygron bestaande situatie">
         </div>
-        <div class="voor-na-kaart">
-          <div class="voor-na-header">
-            <div class="dot" style="background:#1D9E75;"></div>
-            Ontwerp — nieuwe situatie met groendaken, fontein &amp; buurtkamer
-          </div>
-          <img src="../afbeeldingen/overvecht/tygron_na.png" alt="Tygron nieuwe situatie"
-               onclick="openLightbox(this.src,'Tygron — nieuwe situatie')">
+        <div class="slider-handle" id="sliderHandle">
+          <div class="handle-lijn"></div>
+          <div class="handle-knop">⟺</div>
         </div>
       </div>
 
@@ -284,15 +358,34 @@
   </footer>
 
   <script>
+    /* ── VOOR/NA SLIDER ─────────────────────────────── */
+    const wrap    = document.getElementById('sliderWrap');
+    const overlay = document.getElementById('sliderOverlay');
+    const handle  = document.getElementById('sliderHandle');
+    let slepen    = false;
+
+    function setPositie(x) {
+      const rect  = wrap.getBoundingClientRect();
+      let pct     = (x - rect.left) / rect.width;
+      pct         = Math.min(Math.max(pct, 0.02), 0.98);
+      overlay.style.width       = pct * 100 + '%';
+      handle.style.left         = pct * 100 + '%';
+    }
+
+    wrap.addEventListener('mousedown',  e => { slepen = true; setPositie(e.clientX); });
+    window.addEventListener('mousemove', e => { if (slepen) setPositie(e.clientX); });
+    window.addEventListener('mouseup',   () => slepen = false);
+
+    /* ── LIGHTBOX ────────────────────────────────────── */
     function openLightbox(src, titel) {
-      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').src    = src;
       document.getElementById('lightbox-titel').textContent = titel;
       document.getElementById('lightbox').classList.add('open');
     }
     function sluitLightbox() {
       document.getElementById('lightbox').classList.remove('open');
     }
-    document.addEventListener('keydown', e => { if(e.key==='Escape') sluitLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') sluitLightbox(); });
   </script>
 
 </body>
