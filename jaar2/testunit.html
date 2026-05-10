@@ -11,16 +11,17 @@
     .proj-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--rand); margin-bottom: 2rem; }
     .proj-titel { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
     .proj-meta  { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 0.875rem; color: var(--tekst-zacht); }
-    .sectie-h   { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; }
-    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
-    .pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .sectie-h   { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    .sectie-h:first-child { margin-top: 0; }
+    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
 
-    /* Dashboard embed wrapper */
+    /* Dashboard embed */
     .dash-wrap {
       border: 1px solid var(--rand);
       border-radius: var(--radius);
       overflow: hidden;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
     .dash-header {
       background: #f5f5f5;
@@ -41,88 +42,98 @@
     }
     .dash-live::before {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--groen);
       display: block;
-      /* Pulserend animatie voor het live-bolletje */
       animation: puls 1.5s infinite;
     }
-    @keyframes puls {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
+    @keyframes puls { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    /* Layout */
+    .layout-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
+    .stat-blok { background: var(--groen-licht); border: 1px solid #b0dece; border-radius: 10px; padding: 1rem; text-align: center; }
+    .stat-waarde { font-size: 1.4rem; font-weight: 600; color: #0F6E56; line-height: 1.2; }
+    .stat-label  { font-size: 0.75rem; color: #1D9E75; margin-top: 4px; }
+
+    /* Sensor lijst */
+    .sensor-lijst { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .sensor-item {
+      display: grid;
+      grid-template-columns: 28px 130px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border: 1px solid var(--rand);
+      border-radius: 8px;
+      background: var(--wit);
+      font-size: 0.85rem;
     }
-
-    /*
-      STREAMLIT EMBED:
-      Als je Streamlit-app live staat op Streamlit Cloud,
-      vervang de placeholder hieronder door:
-        <iframe src="https://jouw-app.streamlit.app/?embedded=true"
-          style="width:100%; height:520px; border:none; display:block;">
-        </iframe>
-
-      '?embedded=true' verbergt de Streamlit-toolbar zodat het er strak uitziet.
-    */
-    .dash-placeholder {
-      width: 100%;
-      height: 520px;
-      background: linear-gradient(135deg, #e8f5f0 0%, #c8eadf 100%);
+    .sensor-nr {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--paars-licht);
+      color: var(--paars-donker);
+      font-size: 0.75rem;
+      font-weight: 600;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      color: #0F6E56;
     }
-    .dash-placeholder .icoon { font-size: 3rem; }
-    .dash-placeholder p { font-size: 0.9rem; font-weight: 500; }
-    .dash-placeholder small { font-size: 0.78rem; color: var(--groen); opacity: 0.7; }
+    .sensor-naam { font-weight: 500; color: var(--tekst); }
+    .sensor-omschrijving { color: var(--tekst-zacht); font-size: 0.82rem; }
+    .sensor-item.probleem { background: #fff5f5; border-color: #fecaca; }
+    .sensor-item.probleem .sensor-nr { background: #fee2e2; color: #991b1b; }
 
-    /* Twee kolommen layout */
-    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
-
-    /* Live sensor-statistieken */
-    .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
-    .stat-blok {
-      background: var(--groen-licht);
-      border: 1px solid #b0dece;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .stat-waarde { font-size: 1.4rem; font-weight: 600; color: #0F6E56; }
-    .stat-label  { font-size: 0.75rem; color: #1D9E75; margin-top: 2px; }
-
-    /* Technische uitleglijst */
-    .tech-lijst { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .tech-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 12px;
-      background: var(--groen-licht);
-      border: 1px solid #b0dece;
-      border-radius: 8px;
+    /* Validatie tabel */
+    .validatie-tabel {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+    .validatie-tabel th {
+      background: #003366;
+      color: white;
+      padding: 9px 14px;
+      text-align: left;
+      font-weight: 500;
+    }
+    .validatie-tabel td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--rand);
       color: var(--tekst-zacht);
     }
-    .tech-item strong { color: var(--tekst); display: block; margin-bottom: 2px; }
+    .validatie-tabel tr:nth-child(even) td { background: var(--groen-licht); }
+    .goed  { color: #0F6E56; font-weight: 600; }
+    .matig { color: #BA7517; font-weight: 600; }
 
-    .foto-placeholder {
-      width: 100%;
-      aspect-ratio: 16/7;
-      background: var(--groen-licht);
-      border: 1px solid #b0dece;
+    /* Dashboard onderdelen */
+    .dash-onderdelen { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
+    .dash-onderdeel {
+      padding: 12px 14px;
+      border: 1px solid var(--rand);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      color: #0F6E56;
-      text-align: center;
-      padding: 1rem;
+      background: var(--wit);
     }
+    .dash-onderdeel-titel { font-size: 0.85rem; font-weight: 500; color: var(--tekst); margin-bottom: 4px; }
+    .dash-onderdeel-sub   { font-size: 0.78rem; color: var(--tekst-zacht); line-height: 1.5; }
+
+    /* Alarm blok */
+    .alarm-blok {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .alarm-titel { font-size: 0.875rem; font-weight: 600; color: #c2410c; margin-bottom: 0.5rem; }
+    .alarm-lijst { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .alarm-lijst li { font-size: 0.85rem; color: var(--tekst-zacht); display: flex; gap: 8px; }
+    .alarm-lijst li::before { content: '⚠️'; font-size: 0.75rem; }
   </style>
 </head>
 <body>
@@ -142,127 +153,247 @@
       <div class="proj-hero fade-1">
         <div class="breadcrumb">
           <a href="../index.html">Portfolio</a> ›
-          <a href="index.html">Jaar 2</a> ›
-          Blok 2 ›
-          <span>Testunit USP</span>
+          <a href="index.html">Jaar 2</a> › Blok 2 › <span>Testunit USP Dak</span>
         </div>
-        <h1 class="proj-titel">Testunit USP Dak — live meetdata dashboard</h1>
+        <h1 class="proj-titel">Testunit USP Dak — digital twin &amp; Grafana dashboard</h1>
         <div class="proj-meta">
-          <span>Jaar 2 · Blok 2</span>
-          <span>·</span>
-          <span>Data-visualisatie &amp; sensordata</span>
-          <span>·</span>
-          <span class="badge badge-inter">interactief</span>
+          <span>Jaar 2 · Blok 2</span><span>·</span>
+          <span>Data-visualisatie · Sensordata · Digital Twin</span><span>·</span>
+          <span class="badge badge-inter">live dashboard</span>
         </div>
       </div>
 
-      <!-- Sensor-stats bovenaan -->
-      <div class="stats fade-2">
-        <!-- Vervang XX door echte gemiddelde waarden uit jouw dataset -->
+      <!-- STATS -->
+      <div class="stats-grid fade-2">
         <div class="stat-blok">
-          <div class="stat-waarde">XX °C</div>
-          <div class="stat-label">gem. temperatuur</div>
+          <div class="stat-waarde">11</div>
+          <div class="stat-label">sensoren in de unit</div>
         </div>
         <div class="stat-blok">
-          <div class="stat-waarde">XX%</div>
-          <div class="stat-label">gem. luchtvochtigheid</div>
+          <div class="stat-waarde">32,0°C</div>
+          <div class="stat-label">gemeten max. temp.</div>
         </div>
         <div class="stat-blok">
-          <div class="stat-waarde">XX W/m²</div>
-          <div class="stat-label">gem. zonnestraling</div>
+          <div class="stat-waarde">52%</div>
+          <div class="stat-label">relatieve luchtvochtigheid</div>
+        </div>
+        <div class="stat-blok">
+          <div class="stat-waarde">15 min</div>
+          <div class="stat-label">interval alarm-check</div>
         </div>
       </div>
 
-      <!-- DASHBOARD EMBED -->
-      <div class="dash-wrap fade-2">
-        <div class="dash-header">
-          <span>Testunit · USP Dak Utrecht</span>
-          <span class="dash-live">interactief dashboard</span>
-        </div>
-
-        <!--
-          GRAFANA EMBED — twee opties:
-
-          OPTIE 1: Grafana Cloud (publiek dashboard)
-          Als je dashboard publiek is op Grafana Cloud:
-          <iframe
-            src="https://snapshots.raintank.io/dashboard/snapshot/JOUW-SNAPSHOT-ID"
-            style="width:100%; height:520px; border:none; display:block;"
-            title="USP Testunit Dashboard">
-          </iframe>
-
-          OPTIE 2: Grafana panel embed (als je "Share > Embed" gebruikt)
-          In Grafana: open je dashboard → klik op een panel → Share → Embed
-          Kopieer de iframe-code en plak die hier.
-
-          OPTIE 3: Grafana snapshot
-          In Grafana: klik op het deelicoon → Snapshot → Publish
-          Kopieer de snapshot-URL en gebruik die als src hierboven.
-
-          Verwijder daarna de .dash-placeholder div hieronder.
-        -->
-        <div class="dash-placeholder">
-          <div class="icoon">📊</div>
-          <p>Streamlit dashboard komt hier</p>
-          <small>Vervang dit door je Streamlit embed — zie de uitleg in de code</small>
-        </div>
-      </div>
-
-      <!-- INFO + TECHNISCHE UITLEG -->
-      <div class="layout fade-3">
+      <!-- BESCHRIJVING + TOOLS -->
+      <div class="layout-2 fade-2">
         <div>
           <div class="sectie-h">Over dit project</div>
           <p class="beschrijving">
-            Op het dak van het USP staat een testunit met sensoren die continu data
-            meten. Voor dit project heb ik een interactief dashboard gebouwd waarmee
-            je de meetdata kunt bekijken en analyseren.
-            [Schrijf hier jouw eigen beschrijving: wat meet de unit precies, wat heb jij gebouwd en wat kun je ermee?]
+            Op het dak van de Hogeschool Utrecht staat een testunit die de thermische eigenschappen
+            van een flatappartement nabootst. De unit is 10 × 1,8 meter, heeft een houten constructie
+            en is uitgerust met 11 sensoren voor temperatuur, luchtvochtigheid en wind.
+            Een burensimulator in de wanden en vloer bootst de warmteoverdracht van
+            aangrenzende appartementen na.
           </p>
+          <p class="beschrijving">
+            Mijn opdracht was het ontwerpen en bouwen van een Grafana dashboard dat de sensordata
+            real-time visualiseert — inclusief een voorspellingslijn op basis van VABI-simulaties.
+            Zo laat het dashboard niet alleen zien wat er gemeten wordt, maar ook of het gebouw
+            zich gedraagt zoals verwacht. Dat is de kern van de digital twin.
+          </p>
+          <p class="beschrijving">
+            Daarnaast heb ik een automatisch waarschuwingssysteem gebouwd dat via een Python
+            script op Railway elke 15 minuten de database controleert en een e-mail stuurt
+            als een sensor een drempelwaarde overschrijdt.
+          </p>
+        </div>
+        <div>
+          <div class="sectie-h">Mijn rol</div>
+          <div style="background:var(--paars-licht); border:1px solid #c0bdf0; border-radius:8px; padding:12px 14px; font-size:0.875rem; color:var(--paars-donker); margin-bottom:1rem;">
+            <strong>Data visualisator</strong><br>
+            <span style="color:var(--tekst-zacht); font-size:0.82rem;">Dashboard ontwerp &amp; bouw in Grafana, data-koppeling met NEIDS database, waarschuwingssysteem via Python + Railway</span>
+          </div>
+
           <div class="sectie-h">Tools gebruikt</div>
           <div class="pills">
+            <span class="pill pill-groen">Grafana</span>
             <span class="pill pill-paars">Python</span>
-            <span class="pill pill-groen">Streamlit</span>
-            <span class="pill pill-paars">Pandas</span>
-            <span class="pill pill-groen">Plotly</span>
-            <span class="pill pill-amber">Sensordata</span>
+            <span class="pill pill-groen">Railway</span>
+            <span class="pill pill-amber">DHT22 sensoren</span>
+            <span class="pill pill-paars">Raspberry Pi</span>
+            <span class="pill pill-groen">VABI Elements</span>
+            <span class="pill pill-amber">KNMI data</span>
           </div>
-        </div>
 
-        <div>
-          <div class="sectie-h">Hoe werkt het dashboard?</div>
-          <!-- Verander deze uitleg naar hoe jouw dashboard echt werkt -->
-          <ul class="tech-lijst">
-            <li class="tech-item">
-              <span>📡</span>
-              <div>
-                <strong>Data inladen</strong>
-                De sensordata wordt ingeladen vanuit een CSV-bestand met Python (Pandas).
-              </div>
-            </li>
-            <li class="tech-item">
-              <span>📈</span>
-              <div>
-                <strong>Visualisatie</strong>
-                Plotly maakt de interactieve grafieken: je kan inzoomen, een periode selecteren en waarden vergelijken.
-              </div>
-            </li>
-            <li class="tech-item">
-              <span>🌐</span>
-              <div>
-                <strong>Online zetten</strong>
-                Het dashboard draait op Streamlit Cloud en is via een link deelbaar.
-              </div>
-            </li>
-          </ul>
+          <div class="sectie-h">Opdrachtgever</div>
+          <p style="font-size:0.875rem; color:var(--tekst-zacht);">
+            Martin van Dijkhuizen<br>
+            Lectoraat Nieuwe Energie in de Stad (NEIDS)<br>
+            Hogeschool Utrecht
+          </p>
         </div>
       </div>
 
-      <!-- Foto van de testunit zelf -->
-      <div class="sectie-h fade-3">De testunit</div>
-      <div class="foto-placeholder fade-3" style="margin-bottom:2rem;">
-        Foto van de testunit op het dak van het USP<br>
-        <small>voeg hier je afbeelding in</small>
+      <!-- GRAFANA DASHBOARD EMBED -->
+      <div class="sectie-h fade-3">Live Grafana dashboard — snapshot</div>
+      <div class="dash-wrap fade-3">
+        <div class="dash-header">
+          <span>Testunit USP Dak · Hogeschool Utrecht</span>
+          <span class="dash-live">Grafana snapshot</span>
+        </div>
+        <iframe
+          src="https://snapshots.raintank.io/dashboard/snapshot/LgcWxPs98KDvasNuRq9GrYkNhbrDu2RY"
+          style="width:100%; height:700px; border:none; display:block;"
+          title="Testunit USP Dashboard">
+        </iframe>
       </div>
+
+      <!-- DASHBOARD ONDERDELEN -->
+      <div class="sectie-h fade-3">Wat zie je in het dashboard?</div>
+      <div class="dash-onderdelen fade-3">
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">📈 Binnen vs buiten temperatuur</div>
+          <div class="dash-onderdeel-sub">Vergelijkt het gemiddelde van alle binnensensoren met de buitensensoren over tijd. Direct inzicht in hoe de buitentemperatuur het binnenklimaat beïnvloedt.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">💧 Luchtvochtigheid per sensor</div>
+          <div class="dash-onderdeel-sub">Alle zes sensoren gelijktijdig. In één oogopslag zichtbaar welke sensor afwijkt — of water in de behuizing zit zoals bij sensor 6 (buitenmuur).</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">🌡️ Temperatuur per sensorgroep</div>
+          <div class="dash-onderdeel-sub">Sensoren gegroepeerd: gevels &amp; hoek, vloeren, raam &amp; ruimte, muren. Overzichtelijk zonder informatie te verliezen.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">🟢 Sensor panels</div>
+          <div class="dash-onderdeel-sub">Per sensor: huidige temperatuur en luchtvochtigheid. Groen = normaal, oranje = uitschieter, grijs = meer dan 10 minuten geen data.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">🏠 Sensorpositiekaart</div>
+          <div class="dash-onderdeel-sub">Plattegrond van de testunit met de locaties van alle sensoren genummerd. Koppelt meetwaarden direct aan de fysieke locatie in het gebouw.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">💨 Windsnelheid &amp; richting</div>
+          <div class="dash-onderdeel-sub">Actuele windsnelheid in m/s en kompasrichting. Relevant omdat wind invloed heeft op de warmteverdeling rondom de testunit.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">🔴 Sensor status</div>
+          <div class="dash-onderdeel-sub">Statusoverzicht onderaan het dashboard — welke sensoren leveren geen data? Snel zichtbaar of er technische problemen zijn.</div>
+        </div>
+        <div class="dash-onderdeel">
+          <div class="dash-onderdeel-titel">📉 Voorspellingslijn (VABI)</div>
+          <div class="dash-onderdeel-sub">Gesimuleerde binnentemperatuur als stippellijn. Dit is de kern van de digital twin: het verschil tussen simulatie en werkelijkheid direct inzichtelijk.</div>
+        </div>
+      </div>
+
+      <!-- ALARM SYSTEEM -->
+      <div class="alarm-blok fade-3">
+        <div class="alarm-titel">⚠️ Automatisch waarschuwingssysteem</div>
+        <p style="font-size:0.85rem; color:var(--tekst-zacht); margin-bottom:0.75rem;">
+          Een Python script draait continu op Railway (cloud) en controleert de database elke 15 minuten.
+          Bij overschrijding van een drempelwaarde verstuurt het automatisch een e-mail met
+          een overzicht van alle sensorwaarden en hun status.
+        </p>
+        <ul class="alarm-lijst">
+          <li>Binnentemperatuur boven 26°C</li>
+          <li>Buitentemperatuur boven 30°C</li>
+          <li>Luchtvochtigheid boven 70%</li>
+        </ul>
+      </div>
+
+      <!-- SENSOREN -->
+      <div class="sectie-h fade-3">Meetopstelling — 11 sensoren</div>
+      <ul class="sensor-lijst fade-3" style="margin-bottom:2rem;">
+        <li class="sensor-item">
+          <div class="sensor-nr">1</div>
+          <span class="sensor-naam">Vloer</span>
+          <span class="sensor-omschrijving">Onder de vloer (buiten) — registreert daktemperatuur direct onder de vloerconstructie</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">2</div>
+          <span class="sensor-naam">Raam</span>
+          <span class="sensor-omschrijving">Direct achter het glas (zuidgevel) — meet effect van directe zoninstraling nabij het kozijn</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">3</div>
+          <span class="sensor-naam">Ruimte</span>
+          <span class="sensor-omschrijving">Midden in de ruimte op 1,5m hoogte — referentiesensor voor het binnenklimaat</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">4</div>
+          <span class="sensor-naam">Hoek</span>
+          <span class="sensor-omschrijving">Nabij de vloer, zuidzijde — inzicht in temperatuurgradiënt over de verticale as</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">5</div>
+          <span class="sensor-naam">Binnenmuur</span>
+          <span class="sensor-omschrijving">Binnenzijde buitengevel boven kozijn — registreert warmteoverdracht door de gevelconstructie</span>
+        </li>
+        <li class="sensor-item probleem">
+          <div class="sensor-nr">6</div>
+          <span class="sensor-naam">Buitenmuur ⚠️</span>
+          <span class="sensor-omschrijving">Buitenzijde buitengevel — luchtvochtigheid geeft constant 99% door water in behuizing. Nieuw dakje ontworpen als oplossing.</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">7–10</div>
+          <span class="sensor-naam">Burensimulator</span>
+          <span class="sensor-omschrijving">Temperatuur van verwarmingsbuizen: vloer oost/west + gevel oost/west — simuleert warmte van buurappartementen</span>
+        </li>
+        <li class="sensor-item">
+          <div class="sensor-nr">11</div>
+          <span class="sensor-naam">Wind</span>
+          <span class="sensor-omschrijving">Windrichting &amp; windsnelheid — meet elke 5 minuten een momentopname</span>
+        </li>
+      </ul>
+
+      <!-- VALIDATIE -->
+      <div class="sectie-h fade-3">Validatie — VABI simulatie vs gemeten data (16–22 maart)</div>
+      <table class="validatie-tabel fade-3">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>VABI simulatie</th>
+            <th>Gemeten waarde</th>
+            <th>Verschil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Binnentemperatuur gem.</td>
+            <td>19,0 °C</td>
+            <td>14,7 °C</td>
+            <td class="matig">4,3 °C</td>
+          </tr>
+          <tr>
+            <td>Binnentemperatuur max.</td>
+            <td>32,05 °C</td>
+            <td>32,0 °C</td>
+            <td class="goed">0,05 °C ✓</td>
+          </tr>
+          <tr>
+            <td>Binnentemperatuur min.</td>
+            <td>14,0 °C</td>
+            <td>14,3 °C</td>
+            <td class="goed">0,3 °C ✓</td>
+          </tr>
+          <tr>
+            <td>Relatieve luchtvochtigheid</td>
+            <td>52%</td>
+            <td>52%</td>
+            <td class="goed">0% ✓</td>
+          </tr>
+          <tr>
+            <td>Buitentemperatuur gem.</td>
+            <td>8,5 °C</td>
+            <td>10,5 °C</td>
+            <td class="matig">2,0 °C</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.82rem; color:var(--tekst-zacht); margin-bottom:2rem;">
+        De maximale binnentemperatuur en luchtvochtigheid komen vrijwel exact overeen.
+        Het verschil in gemiddelde temperatuur is verklaarbaar door vereenvoudigingen in het simulatiemodel
+        en kleine afwijkingen in sensorplaatsing. Conclusie: de meetopstelling en simulatie zijn
+        voldoende betrouwbaar.
+      </p>
 
       <div class="proj-nav fade-4">
         <a href="tuinwijk.html">← Blok 1 — Tuinwijk</a>
