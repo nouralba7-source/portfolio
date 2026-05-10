@@ -11,55 +11,63 @@
     .proj-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--rand); margin-bottom: 2rem; }
     .proj-titel { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
     .proj-meta  { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 0.875rem; color: var(--tekst-zacht); }
-    .sectie-h   { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; }
-    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1.5rem; }
-    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 2rem; }
+    .sectie-h   { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tekst-zacht); margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    .sectie-h:first-child { margin-top: 0; }
+    .beschrijving { font-size: 0.95rem; color: var(--tekst-zacht); line-height: 1.7; margin-bottom: 1rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
 
-    /* Sketchfab embed — zelfde stijl als tinyhouse */
-    .embed-wrap { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; margin-bottom: 2rem; }
+    /* Embed wrappers */
+    .embed-wrap { border: 1px solid var(--rand); border-radius: var(--radius); overflow: hidden; margin-bottom: 2.5rem; }
     .embed-header { background: #f5f5f5; padding: 8px 14px; border-bottom: 1px solid var(--rand); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--tekst-zacht); }
-    .embed-3d { display: flex; align-items: center; gap: 5px; color: var(--paars); font-size: 0.78rem; }
+    .embed-3d   { display: flex; align-items: center; gap: 5px; color: var(--paars); font-size: 0.78rem; }
     .embed-3d::before { content: '⬡'; font-size: 0.7rem; }
-    .model-placeholder { width: 100%; height: 380px; background: linear-gradient(135deg, #d4f0e4 0%, #a8dfc7 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; color: #0F6E56; }
-    .model-placeholder .icoon { font-size: 3rem; }
-    .model-placeholder p { font-size: 0.9rem; font-weight: 500; }
-    .model-placeholder small { font-size: 0.78rem; opacity: 0.7; }
+    .embed-yt   { display: flex; align-items: center; gap: 5px; color: #E24B4A; font-size: 0.78rem; }
+    .embed-yt::before { content: '▶'; font-size: 0.65rem; }
 
-    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    /* Layout */
+    .layout-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+    .layout-3 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
 
-    /* Energiemaatregelen als lijst */
-    .maatregel-lijst { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    /* Stats blokken */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
+    .stat-blok { background: var(--groen-licht); border: 1px solid #b0dece; border-radius: 10px; padding: 1rem; text-align: center; }
+    .stat-waarde { font-size: 1.4rem; font-weight: 600; color: #0F6E56; line-height: 1.2; }
+    .stat-label  { font-size: 0.75rem; color: #1D9E75; margin-top: 4px; }
+
+    /* Energielabel balk */
+    .label-balk { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+    .label-oud, .label-nieuw { font-size: 1.1rem; font-weight: 600; padding: 6px 14px; border-radius: 6px; }
+    .label-oud  { background: #FEE2E2; color: #991B1B; }
+    .label-nieuw { background: var(--groen-licht); color: #0F6E56; }
+    .label-pijl { font-size: 1.2rem; color: var(--tekst-zacht); }
+
+    /* Maatregelen lijst */
+    .maatregel-lijst { list-style: none; display: flex; flex-direction: column; gap: 7px; }
     .maatregel-item {
-      display: flex;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      align-items: center;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 9px 12px;
       background: var(--groen-licht);
       border: 1px solid #b0dece;
       border-radius: 8px;
       font-size: 0.875rem;
     }
-    .maatregel-icoon { font-size: 1rem; flex-shrink: 0; }
+    .maatregel-deel { font-weight: 500; color: #0F6E56; font-size: 0.8rem; }
+    .maatregel-naam { color: var(--tekst); }
+    .maatregel-tag  { font-size: 0.72rem; padding: 2px 7px; border-radius: 10px; background: white; color: #0F6E56; border: 1px solid #b0dece; white-space: nowrap; }
 
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
-    .stat-blok { background: var(--groen-licht); border: 1px solid #b0dece; border-radius: 10px; padding: 1rem; }
-    .stat-waarde { font-size: 1.5rem; font-weight: 600; color: #0F6E56; }
-    .stat-label  { font-size: 0.78rem; color: #1D9E75; margin-top: 2px; }
+    /* Opbouw woning */
+    .opbouw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .opbouw-blok { background: #f8f8f8; border: 1px solid var(--rand); border-radius: 8px; padding: 12px; }
+    .opbouw-titel { font-size: 0.8rem; font-weight: 600; color: var(--tekst); margin-bottom: 8px; }
+    .opbouw-laag { font-size: 0.78rem; color: var(--tekst-zacht); padding: 3px 0; border-bottom: 1px solid var(--rand); }
+    .opbouw-laag:last-child { border-bottom: none; }
 
-    .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .foto-placeholder {
-      aspect-ratio: 4/3;
-      background: var(--groen-licht);
-      border: 1px solid #b0dece;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      color: #0F6E56;
-      text-align: center;
-      padding: 1rem;
-    }
+    /* Team */
+    .team-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+    .team-lid { background: var(--paars-licht); color: var(--paars-donker); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
   </style>
 </head>
 <body>
@@ -76,101 +84,247 @@
   <main>
     <div class="container">
 
+      <!-- HERO -->
       <div class="proj-hero fade-1">
         <div class="breadcrumb">
           <a href="../index.html">Portfolio</a> ›
-          <a href="index.html">Jaar 2</a> ›
-          Blok 1 ›
-          <span>Tuinwijk</span>
+          <a href="index.html">Jaar 2</a> › Blok 1 › <span>Tuinwijk</span>
         </div>
-        <h1 class="proj-titel">Tuinwijk — energie neutraal gebied</h1>
+        <h1 class="proj-titel">Tuinwijk-west — verduurzaming van een Utrechtse volkswijkje</h1>
         <div class="proj-meta">
-          <span>Jaar 2 · Blok 1</span>
-          <span>·</span>
-          <span>Energie &amp; duurzaamheid</span>
+          <span>Jaar 2 · Blok 1</span><span>·</span>
+          <span>BIM · Energietransitie · Digitaal bouwen</span><span>·</span>
+          <span class="badge badge-3d">3D model</span>
+          <span class="badge badge-inter" style="margin-left:4px;">vogelvlucht video</span>
         </div>
       </div>
 
-      <!-- 3D VIEWER — zelfde aanpak als Tiny House -->
-      <div class="embed-wrap fade-2">
-        <div class="embed-header">
-          <span>Tuinwijk · 3D model</span>
-          <span class="embed-3d">3D viewer — Sketchfab</span>
+      <!-- STATS -->
+      <div class="stats-grid fade-2">
+        <div class="stat-blok">
+          <div class="stat-waarde">83</div>
+          <div class="stat-label">woningen gemodelleerd</div>
         </div>
-        <!--
-          Zelfde stappen als bij Tiny House:
-          1. Exporteer je Revit-model → File → Export → FBX of OBJ
-          2. Upload op sketchfab.com
-          3. Open je model → klik "Embed" → kopieer de URL
-          4. Vervang de placeholder hieronder door:
-             <iframe class="sketchfab-iframe"
-               src="https://sketchfab.com/models/JOUW-MODEL-ID/embed"
-               style="width:100%; height:380px; border:none; display:block;"
-               allowfullscreen>
-             </iframe>
-        -->
-        <div class="model-placeholder">
-          <div class="icoon">⬡</div>
-          <p>3D model Tuinwijk komt hier</p>
-          <small>Vervang dit door je Sketchfab embed — zie de uitleg in de code</small>
+        <div class="stat-blok">
+          <div class="stat-waarde">D → B</div>
+          <div class="stat-label">energielabel verbetering</div>
+        </div>
+        <div class="stat-blok">
+          <div class="stat-waarde">1.320</div>
+          <div class="stat-label">zonnepanelen nodig</div>
+        </div>
+        <div class="stat-blok">
+          <div class="stat-waarde">2x</div>
+          <div class="stat-label">Bravo-modules in de wijk</div>
         </div>
       </div>
 
-      <div class="layout fade-3">
+      <!-- BESCHRIJVING -->
+      <div class="layout-2 fade-2">
         <div>
           <div class="sectie-h">Over dit project</div>
           <p class="beschrijving">
-            Voor dit project heb ik onderzocht hoe een gebied in de Tuinwijk energie neutraal gemaakt kan worden.
-            [Schrijf hier jouw eigen beschrijving: wat was de opdracht, welke aanpak heb je gekozen, en wat was je eindconclusie?]
+            Tuinwijk-west is een karakteristieke volkswijkje in het noordoosten van Utrecht,
+            gebouwd in 1922. De wijk bestaat uit rijtjeshuizen met een gemiddeld energielabel
+            van D tot F — veel warmteverlies, geen goede isolatie en verouderde installaties.
+          </p>
+          <p class="beschrijving">
+            De opdracht was om een duurzaam energiesysteem te ontwerpen voor alle woningen,
+            zonder de architectonische uitstraling van de wijk te beschadigen. We werkten in
+            opdracht van ingenieursbureau Inside-out, namens woningcorporatie Portaal.
+          </p>
+          <p class="beschrijving">
+            Met BIM hebben we eerst een volledige digital twin van de bestaande wijk gemaakt
+            in Revit, en daarna een nieuw model met alle verduurzamingsmaatregelen. Het resultaat:
+            een gemiddeld energielabel B, collectieve verwarming via twee centrale Bravo-modules
+            en biobased isolatie door de hele wijk.
           </p>
 
-          <div class="sectie-h">Energiemaatregelen</div>
-          <!-- Pas deze aan naar jouw eigen maatregelen -->
-          <ul class="maatregel-lijst">
-            <li class="maatregel-item"><span class="maatregel-icoon">☀️</span>Zonnepanelen op daken</li>
-            <li class="maatregel-item"><span class="maatregel-icoon">🌡️</span>Warmtepomp installaties</li>
-            <li class="maatregel-item"><span class="maatregel-icoon">🏠</span>Isolatie bestaande woningen</li>
-            <li class="maatregel-item"><span class="maatregel-icoon">🌿</span>[Voeg jouw maatregel toe]</li>
-          </ul>
+          <div class="sectie-h">Energielabel verbetering</div>
+          <div class="label-balk">
+            <div class="label-oud">Label D/E/F</div>
+            <div class="label-pijl">→</div>
+            <div class="label-nieuw">Label B</div>
+          </div>
+          <p style="font-size:0.82rem; color:var(--tekst-zacht);">
+            160 – 190 kWh/m²/jaar · warmtevraag omlaag van ~8.900 naar ~6.000 kWh/jaar
+          </p>
         </div>
 
         <div>
-          <div class="sectie-h">Resultaten</div>
-          <div class="stats">
-            <div class="stat-blok">
-              <div class="stat-waarde">XX%</div>
-              <div class="stat-label">energie neutraal</div>
-            </div>
-            <div class="stat-blok">
-              <div class="stat-waarde">XX</div>
-              <div class="stat-label">woningen</div>
-            </div>
-            <div class="stat-blok">
-              <div class="stat-waarde">XX MWh</div>
-              <div class="stat-label">opgewekte energie</div>
-            </div>
-            <div class="stat-blok">
-              <div class="stat-waarde">XX ton</div>
-              <div class="stat-label">CO₂ bespaard</div>
-            </div>
-          </div>
-
           <div class="sectie-h">Tools gebruikt</div>
           <div class="pills">
-            <span class="pill pill-groen">Energieberekeningen</span>
-            <span class="pill pill-paars">Python</span>
-            <span class="pill pill-groen">GIS</span>
-            <span class="pill pill-amber">Data-analyse</span>
+            <span class="pill pill-paars">Revit</span>
+            <span class="pill pill-groen">Navisworks</span>
+            <span class="pill pill-paars">Autodesk Construction Cloud</span>
+            <span class="pill pill-groen">3D-BAG</span>
+            <span class="pill pill-amber">BIM</span>
+            <span class="pill pill-paars">Clashdetectie</span>
+            <span class="pill pill-groen">4D-planning</span>
+            <span class="pill pill-amber">ITO / materialenpaspoort</span>
           </div>
+
+          <div class="sectie-h">Projectteam</div>
+          <div class="team-grid">
+            <div class="team-lid">Abdennour el Banihiati</div>
+            <div class="team-lid">Henri Broekhoff</div>
+            <div class="team-lid">Tim Guitoneau</div>
+            <div class="team-lid">Quinten van Eck</div>
+          </div>
+
+          <div class="sectie-h">Opdrachtgever</div>
+          <p style="font-size:0.875rem; color:var(--tekst-zacht);">
+            Inside-out Technologies B.V. (namens Portaal woningcorporatie)
+          </p>
         </div>
       </div>
 
-      <div class="sectie-h fade-3">Afbeeldingen</div>
-      <div class="fotos fade-3" style="margin-bottom:2rem;">
-        <div class="foto-placeholder">Energiekaart<br><small>voeg hier je afbeelding in</small></div>
-        <div class="foto-placeholder">Maatregelenplan<br><small>voeg hier je afbeelding in</small></div>
-        <div class="foto-placeholder">Berekeningen<br><small>voeg hier je afbeelding in</small></div>
-        <div class="foto-placeholder">Resultaten grafiek<br><small>voeg hier je afbeelding in</small></div>
+      <!-- 3D MODEL WONING -->
+      <div class="sectie-h fade-3">3D model — standaardwoning (Revit → Sketchfab)</div>
+      <div class="embed-wrap fade-3">
+        <div class="embed-header">
+          <span>Standaardwoning Tuinwijk-west · bestaande situatie</span>
+          <span class="embed-3d">3D viewer — Sketchfab</span>
+        </div>
+        <!--
+          Ga naar: https://skfb.ly/pJOBO op Sketchfab
+          Klik op "Embed" → kopieer de iframe src URL (begint met https://sketchfab.com/models/...)
+          Vervang onderstaande placeholder door:
+            <iframe
+              title="Tuinwijk-west standaardwoning"
+              frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              style="width:100%; height:420px; border:none; display:block;"
+              src="https://sketchfab.com/models/JOUW-MODEL-ID/embed">
+            </iframe>
+        -->
+        <iframe
+          title="Tuinwijk-west standaardwoning"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          style="width:100%; height:420px; border:none; display:block;"
+          src="https://sketchfab.com/models/VERVANG-DIT-MET-JOUW-MODEL-ID/embed">
+        </iframe>
+      </div>
+
+      <!-- VOGELVLUCHT VIDEO -->
+      <div class="sectie-h fade-3">Vogelvlucht visualisatie — nieuwe situatie</div>
+      <div class="embed-wrap fade-3">
+        <div class="embed-header">
+          <span>Tuinwijk-west · nieuwe situatie met Bravo-modules en zonnepanelen</span>
+          <span class="embed-yt">YouTube visualisatie</span>
+        </div>
+        <iframe
+          src="https://www.youtube.com/embed/E3UUO11Lfcc"
+          style="width:100%; height:420px; border:none; display:block;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="Vogelvlucht Tuinwijk-west nieuwe situatie">
+        </iframe>
+      </div>
+
+      <!-- MAATREGELEN -->
+      <div class="sectie-h fade-3">Verduurzamingsmaatregelen</div>
+      <ul class="maatregel-lijst fade-3" style="margin-bottom:2.5rem;">
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Dak</span>
+          <span class="maatregel-naam">Houtvezel isolatie van binnenuit — 160mm, Rd 4.2</span>
+          <span class="maatregel-tag">biobased</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Gevel (optie A)</span>
+          <span class="maatregel-naam">Spouwisolatie met houtvezelplaten — 60mm, Rd 1.35</span>
+          <span class="maatregel-tag">biobased</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Gevel (optie B)</span>
+          <span class="maatregel-naam">Inside-out Delta-module — prefab gevelelement met isolatie + installatie geïntegreerd</span>
+          <span class="maatregel-tag">achtergevel</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Kozijnen</span>
+          <span class="maatregel-naam">Houten kozijnen vervangen — zelfde uitstraling, HR++ glas</span>
+          <span class="maatregel-tag">welstand</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Vloer</span>
+          <span class="maatregel-naam">Isovlas kruipruimte-isolatie — 100mm, Rd 2.63</span>
+          <span class="maatregel-tag">biobased</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Klimaat</span>
+          <span class="maatregel-naam">2× Bravo-module centraal in de wijk — 250kW, verwarming + warm tapwater</span>
+          <span class="maatregel-tag">collectief</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Sturing</span>
+          <span class="maatregel-naam">Foxtrot-module in meterkast per woning — slim energiebeheer</span>
+          <span class="maatregel-tag">per woning</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Zonnepanelen</span>
+          <span class="maatregel-naam">5 panelen per woning op zuidgericht dakvlak — totaal 1.320 panelen</span>
+          <span class="maatregel-tag">vergunningvrij</span>
+        </li>
+        <li class="maatregel-item">
+          <span class="maatregel-deel">Balkon</span>
+          <span class="maatregel-naam">Echo-module — zonnepanelen geïntegreerd in balustrade</span>
+          <span class="maatregel-tag">zuidgericht</span>
+        </li>
+      </ul>
+
+      <!-- CONSTRUCTIE OPBOUW -->
+      <div class="sectie-h fade-3">Constructieopbouw bestaande woning</div>
+      <div class="opbouw-grid fade-3" style="margin-bottom:2.5rem;">
+        <div class="opbouw-blok">
+          <div class="opbouw-titel">🏠 Dak (buiten → binnen)</div>
+          <div class="opbouw-laag">Dakpannen</div>
+          <div class="opbouw-laag">Spantenkap</div>
+          <div class="opbouw-laag">OSB platen</div>
+          <div class="opbouw-laag">Gipsplaten</div>
+          <div class="opbouw-laag">Stucwerk</div>
+        </div>
+        <div class="opbouw-blok">
+          <div class="opbouw-titel">🧱 Gevel (binnen → buiten)</div>
+          <div class="opbouw-laag">100mm metselwerk binnenblad</div>
+          <div class="opbouw-laag">70mm ongeïsoleerde luchtspouw</div>
+          <div class="opbouw-laag">100mm metselwerk buitenblad</div>
+          <div class="opbouw-laag">Houten kozijnen + dubbelglas</div>
+        </div>
+      </div>
+
+      <!-- BIM PROCES -->
+      <div class="sectie-h fade-3">BIM-proces</div>
+      <div class="layout-2 fade-3" style="margin-bottom:2.5rem;">
+        <div>
+          <p class="beschrijving">
+            We hebben op basis van archieftekeningen uit het Utrechts Archief en een locatiebezoek
+            een volledige digital twin van de wijk gebouwd in Revit. Eerst de standaardwoning,
+            daarna alle varianten. Via de 3D-BAG hebben we de positionering van de woningen bepaald.
+          </p>
+          <p class="beschrijving">
+            De clashdetectie in Navisworks leverde 1.385 clashes op over 83 woningen
+            (~16 per woning), waarvan bijna 90% soft clashes. Daarna hebben we een 4D-planning
+            gemaakt door de bouwtaken te koppelen aan het 3D-model.
+          </p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="background:var(--paars-licht); border:1px solid #c0bdf0; border-radius:8px; padding:10px 14px; font-size:0.85rem;">
+            <strong style="color:var(--paars-donker);">Clashdetectie</strong><br>
+            <span style="color:var(--tekst-zacht);">1.385 clashes / 83 woningen ≈ 16 per woning</span>
+          </div>
+          <div style="background:var(--groen-licht); border:1px solid #b0dece; border-radius:8px; padding:10px 14px; font-size:0.85rem;">
+            <strong style="color:#0F6E56;">4D-BIM</strong><br>
+            <span style="color:var(--tekst-zacht);">Bouwplanning gekoppeld aan 3D-model via Navisworks TimeLiner</span>
+          </div>
+          <div style="background:var(--amber-licht); border:1px solid #e0c08a; border-radius:8px; padding:10px 14px; font-size:0.85rem;">
+            <strong style="color:var(--amber);">Materialenpaspoort</strong><br>
+            <span style="color:var(--tekst-zacht);">Alle materialen en hoeveelheden vastgelegd via BIM-ITO</span>
+          </div>
+        </div>
       </div>
 
       <div class="proj-nav fade-4">
