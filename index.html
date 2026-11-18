@@ -163,6 +163,12 @@
   <main>
     <div class="container">
 
+      <!-- STAGE BANNER -->
+      <div class="stage-banner fade-1" style="background:var(--groen-licht);border:1px solid #b0dece;border-radius:var(--radius);padding:0.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:1.1rem;">🏗️</span>
+        <span style="font-size:0.85rem;color:#0F6E56;font-weight:500;">Beschikbaar voor een stage in de bouwsector — BIM-coördinatie, werkvoorbereiding of projectondersteuning</span>
+      </div>
+
       <!-- HERO -->
       <section class="hero">
         <img src="afbeeldingen/abdennour.jpg" alt="Abdennour el Banihiati" class="avatar fade-1"
@@ -170,20 +176,21 @@
         <div class="avatar-initialen fade-1" style="display:none;">AB</div>
         <div>
           <h1 class="hero-naam fade-2">Abdennour el Banihiati</h1>
-          <div class="hero-opleiding fade-2">Data-gedreven Built Environment · Hogeschool Utrecht</div>
+          <div class="hero-opleiding fade-2">Built Environment — Data · Hogeschool Utrecht</div>
           <p class="hero-bio fade-3">
-            Student jaar 2. Ik combineer GIS, data-analyse en digitaal bouwen
-            om ruimtelijke vraagstukken inzichtelijk te maken — van energietransitie
-            op wijkniveau tot real-time sensormonitoring.
+            Tweedejaars HBO-student met hands-on ervaring in BIM-coördinatie,
+            4D-planning en VR-visualisatie. Ik combineer digitaal bouwen met
+            data-analyse om bouwprocessen efficiënter en inzichtelijker te maken.
           </p>
           <div class="pills fade-4">
-            <span class="pill pill-paars">Python</span>
-            <span class="pill pill-groen">QGIS</span>
             <span class="pill pill-amber">Revit</span>
-            <span class="pill pill-groen">Grafana</span>
+            <span class="pill pill-paars">Navisworks</span>
+            <span class="pill pill-groen">SYNCHRO</span>
+            <span class="pill pill-amber">Twinmotion</span>
             <span class="pill pill-paars">BIM</span>
-            <span class="pill pill-amber">Tygron</span>
-            <span class="pill pill-groen">Data-analyse</span>
+            <span class="pill pill-groen">QGIS</span>
+            <span class="pill pill-paars">Python</span>
+            <span class="pill pill-groen">Grafana</span>
           </div>
         </div>
       </section>
@@ -214,12 +221,13 @@
       <div class="filter-balk fade-3" id="filter-balk">
         <span class="filter-label">Filter op tool:</span>
         <button class="filter-btn reset actief" data-filter="alles" onclick="setFilter(this)">Alle projecten</button>
-        <button class="filter-btn" data-filter="QGIS"    onclick="setFilter(this)">QGIS</button>
-        <button class="filter-btn" data-filter="Python"  onclick="setFilter(this)">Python</button>
-        <button class="filter-btn" data-filter="Revit"   onclick="setFilter(this)">Revit</button>
-        <button class="filter-btn" data-filter="Tygron"  onclick="setFilter(this)">Tygron</button>
-        <button class="filter-btn" data-filter="BIM"     onclick="setFilter(this)">BIM</button>
-        <button class="filter-btn" data-filter="Grafana" onclick="setFilter(this)">Grafana</button>
+        <button class="filter-btn" data-filter="BIM"        onclick="setFilter(this)">BIM</button>
+        <button class="filter-btn" data-filter="Revit"      onclick="setFilter(this)">Revit</button>
+        <button class="filter-btn" data-filter="Navisworks"  onclick="setFilter(this)">Navisworks</button>
+        <button class="filter-btn" data-filter="QGIS"       onclick="setFilter(this)">QGIS</button>
+        <button class="filter-btn" data-filter="Python"     onclick="setFilter(this)">Python</button>
+        <button class="filter-btn" data-filter="Tygron"     onclick="setFilter(this)">Tygron</button>
+        <button class="filter-btn" data-filter="Grafana"    onclick="setFilter(this)">Grafana</button>
       </div>
 
       <!-- JAAR 1 -->
@@ -328,7 +336,7 @@
           </a>
 
           <a href="jaar2/wieringenhof.html" class="project-kaart"
-             data-skills="BIM Revit Navisworks">
+             data-skills="BIM Revit Navisworks SYNCHRO Twinmotion">
             <div class="kaart-top">
               <div>
                 <div class="kaart-blok">Blok 2</div>
