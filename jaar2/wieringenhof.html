@@ -47,6 +47,10 @@
 
     /* Afbeelding placeholders */
     .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+    .img-grid.drie { grid-template-columns: 1fr 1fr 1fr; }
+    .img-grid.vier { grid-template-columns: 1fr 1fr; }
+    .img-grid .img-wrap.breed { grid-column: span 2; }
+    .img-caption { font-size: 0.75rem; color: var(--tekst-zacht); text-align: center; padding: 6px 8px; background: var(--wit); }
     .img-wrap {
       border-radius: var(--radius);
       overflow: hidden;
@@ -177,14 +181,18 @@
           bekeken kan worden.
         </p>
 
-        <div class="img-grid">
+        <div class="img-grid drie">
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/pointcloud_1.png" alt="Pointcloud scan"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>pointcloud_1.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/pointcloud_1.png" alt="3D pointcloud model — achterkant">
+            <div class="img-caption">3D model — achterzijde</div>
           </div>
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/pointcloud_2.png" alt="Pointcloud resultaat"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>pointcloud_2.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/pointcloud_2.png" alt="Pointcloud detail">
+            <div class="img-caption">Detail — textuur en mesh</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/pointcloud_3.png" alt="Pointcloud volledig model">
+            <div class="img-caption">Volledig 3D model</div>
           </div>
         </div>
 
@@ -213,14 +221,22 @@
           gedetecteerd — botsingen tussen bouwkundige, installatietechnische en constructieve elementen.
         </p>
 
-        <div class="img-grid">
+        <div class="img-grid vier">
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/clash_navisworks.png" alt="Clash detection in Navisworks"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>clash_navisworks.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/clash_navisworks.png" alt="Clash detection — badkamer overzicht">
+            <div class="img-caption">Clash overzicht — badkamer</div>
           </div>
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/clash_detail.png" alt="Clash detail"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>clash_detail.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/clash_detail.png" alt="Clash detail — wasbak vs installaties">
+            <div class="img-caption">Detail — wasbak vs installaties</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/clash_3.png" alt="Clash controle — leidingen">
+            <div class="img-caption">Leidingen en constructie</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/clash_4.png" alt="Clash controle — balkons">
+            <div class="img-caption">Clash test — balkons</div>
           </div>
         </div>
 
@@ -271,12 +287,12 @@
 
         <div class="img-grid">
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/ito_navisworks.png" alt="Navisworks Quantification"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>ito_navisworks.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/ito_navisworks.png" alt="Navisworks Quantification — hoeveelheden tabel">
+            <div class="img-caption">Quantification Report — Navisworks</div>
           </div>
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/ito_archidat.png" alt="Archidat begroting"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>ito_archidat.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/ito_archidat.png" alt="3D badkamer model met meetpunten">
+            <div class="img-caption">3D badkamer — meetpunten</div>
           </div>
         </div>
 
@@ -305,14 +321,22 @@
           Hiermee kun je stap voor stap zien hoe het gebouw wordt opgebouwd.
         </p>
 
-        <div class="img-grid">
+        <div class="img-grid vier">
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/4d_synchro.png" alt="SYNCHRO 4D planning"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>4d_synchro.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/4d_synchro.png" alt="4D BIM start — 02-11-2026">
+            <div class="img-caption">Start bouw — 02 nov 2026</div>
           </div>
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/4d_planning.png" alt="4D planning detail"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>4d_planning.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/4d_2.png" alt="4D BIM — vierde verdieping 02-12-2026">
+            <div class="img-caption">4e verdieping — 02 dec 2026</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/4d_3.png" alt="4D BIM — kozijnen 10-12-2026">
+            <div class="img-caption">5e verdieping kozijnen — 10 dec</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/4d_planning.png" alt="4D BIM — alle verdiepingen klaar 14-01-2027">
+            <div class="img-caption">Alle verdiepingen klaar — 14 jan 2027</div>
           </div>
         </div>
 
@@ -341,14 +365,22 @@
           Het lichtere model (88 MB FBX) zorgde voor betere performance.
         </p>
 
-        <div class="img-grid">
+        <div class="img-grid vier">
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/vr_twinmotion.png" alt="Twinmotion VR render"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>vr_twinmotion.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/vr_twinmotion.png" alt="Neude vanuit de lucht — Twinmotion">
+            <div class="img-caption">Neude vanuit de lucht</div>
           </div>
           <div class="img-wrap" onclick="openLightbox(this)">
-            <img src="../afbeeldingen/wieringenhof/vr_neude.png" alt="Neude VR visualisatie"
-                 onerror="this.outerHTML='<div class=img-placeholder>📷 Voeg afbeelding toe:<br>afbeeldingen/wieringenhof/<br>vr_neude.png</div>'">
+            <img src="../afbeeldingen/wieringenhof/vr_entree.jpg" alt="Entree avond met verlichting">
+            <div class="img-caption">Entree — avond met verlichting</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/vr_neude.png" alt="Gevel bij zonsondergang">
+            <div class="img-caption">Gevel bij zonsondergang</div>
+          </div>
+          <div class="img-wrap" onclick="openLightbox(this)">
+            <img src="../afbeeldingen/wieringenhof/vr_mist.jpg" alt="Gebouw in de mist">
+            <div class="img-caption">Gebouw in de mist</div>
           </div>
         </div>
 
